@@ -44,7 +44,6 @@ Modern approaches leverage pre-trained transformer models fine-tuned on toxicity
 **Key Research:**
 
 1. **Mozafari et al. (2020)** - *"A BERT-Based Transfer Learning Approach for Hate Speech Detection in Online Social Media"*  
-   [DOI link](https://doi.org/10.48550/arXiv.1910.12574)  
    - **Contribution:** Demonstrated that fine-tuning BERT on hate speech datasets achieves superior performance compared to traditional methods  
    - **Methodology:** Fine-tuned BERT-base on multiple hate speech datasets with multi-label classification  
    - **Results:** Achieved 93-95% F1-score across different toxicity categories  
