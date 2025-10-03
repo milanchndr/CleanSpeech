@@ -1,4 +1,3 @@
-```
 # Milestone 1: Problem Definition & Literature Review  
 **CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
 
@@ -194,5 +193,5 @@ Output (Label + Explanation + Rewrite)
 ### Datasets
 - Jigsaw/Conversation AI. (2018). *Toxic Comment Classification Challenge*. Kaggle.  
 - Wulczyn, E., Thain, N., & Dixon, L. (2017). *Ex machina: Personal attacks seen at scale*. WWW.  
-```
+
 
