@@ -38,26 +38,28 @@ A user-friendly web interface will allow:
 
 ## Repository Structure
 
+```text
 CleanSpeech/
 │
 ├── doc/
-│ ├── Milestone 1.md
-│ └── Milestone 2.md
+│   ├── Milestone 1.md
+│   └── Milestone 2.md
 │
 ├── src/
-│ ├── eda.ipynb # Exploratory Data Analysis
-│ ├── prep.ipynb # Data Preparation & Cleaning
-│ ├── baseline.ipynb # Baseline Model (TF-IDF + Logistic Regression)
-│ └── data/
-│ ├── train_data.csv
-│ ├── test_data.csv
-│ ├── clean_train.csv
-│ ├── clean_val.csv
-│ └── clean_test.csv
+│   ├── eda.ipynb               # Exploratory Data Analysis
+│   ├── prep.ipynb              # Data Preparation & Cleaning
+│   ├── baseline.ipynb          # Baseline Model
+│   └── data/
+│       ├── train_data.csv
+│       ├── test_data.csv
+│       ├── clean_train.csv
+│       ├── clean_val.csv
+│       └── clean_test.csv
 │
 └── ui/
-├── app.py # Streamlit Interface
-└── requirements.txt # UI Dependencies
+    ├── app.py                  # Streamlit Interface
+    └── requirements.txt        # UI Dependencies
+
 
 
 ### Folder Descriptions
