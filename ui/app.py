@@ -24,6 +24,8 @@ try:
         render_footer,
     )
     from .charts import probability_bar_chart
+    from . import explain
+
 except ImportError:  # script mode fallback
     from paths import get_root, get_models_dir
     from config import APP_TITLE, APP_CAPTION, CHART_HEIGHT
@@ -106,4 +108,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # Sidebar navigation
+    choice = st.sidebar.radio("Navigation", ["Predict", "Explain"])
+
+    if choice == "Predict":
+        main()
+    elif choice == "Explain":
+        explain.render()
+
