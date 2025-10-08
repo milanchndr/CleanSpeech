@@ -45,6 +45,8 @@ except ImportError:  # script mode fallback
         render_footer,
     )
     from charts import probability_bar_chart
+    import explain
+
 
 
 
