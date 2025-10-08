@@ -1,6 +1,8 @@
 # ui/app.py
 # --- resilient imports: work both as package and as script ---
 import streamlit as st
+from pathlib import Path
+
 
 try:
     # package mode (preferred)
