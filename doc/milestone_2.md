@@ -43,9 +43,9 @@ Before preprocessing, a thorough Exploratory Data Analysis (EDA) was conducted o
 
 *   **Text Cleaning and Normalization:**
     *   A minimal but effective preprocessing pipeline was applied to the `comment_text` column:
-        1.  **Lowercase Conversion:** All text was converted to lowercase to ensure uniformity.
-        2.  **Noise Removal:** URLs, HTML tags, emojis, and non-ASCII characters were removed using regular expressions.
-        3.  **Whitespace Normalization:** Multiple spaces and line breaks were collapsed into a single space.
+        1.  **Noise Removal:** URLs, HTML tags, emojis, and non-ASCII characters were removed using regular expressions.
+        2.  **Whitespace Normalization:** Multiple spaces and line breaks were collapsed into a single space.
+        3.  **HTML Tag/Url removal :** URLs, HTML tags, emojis, and non-ASCII characters were removed using regular expressions.
     *   The cleaned text was stored in a new `clean_text` column, preserving the original comment for reference.
 
 *   **Final Structuring and Splitting:**
