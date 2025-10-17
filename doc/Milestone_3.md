@@ -1,4 +1,4 @@
-![Architecture Diagram](architecture.jpg)
+![Architecture Diagram](architecture.png)
 # **Architecture Justification**
 
 The CleanSpeech architecture integrates modular components for toxicity detection, explainability, and constructive rewriting. The design prioritizes contextual accuracy, interpretability, and rewrite quality while maintaining flexibility for future model updates.
