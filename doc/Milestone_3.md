@@ -11,7 +11,7 @@ The architecture follows a linear yet modular flow:
 
 1. **User Input** – The system receives a text or comment.
 2. **Preprocessing** – Cleaning and tokenization standardize the input before classification.
-3. **Classification** – The **mDeBERTa-v3** model performs multi-label toxicity detection.
+3. **Classification** – The **mDeBERTa-v3** model performs multi-label toxicity detection with Scales toxicity intensity (Mild → Severe)
 4. **Explainability & Scoring** – SHAP-based contribution graphs highlight influential tokens and severity scores are generated.
 5. **Rewriting** – The **Gemini API** rewrites the toxic text into a constructive form.
 6. **Response Composition** – Labels, explanations, and rewritten text are integrated and returned to the user.
