@@ -1,4 +1,4 @@
-
+![Architecture Diagram](architecture.jpg)
 # **Architecture Justification**
 
 The CleanSpeech architecture integrates modular components for toxicity detection, explainability, and constructive rewriting. The design prioritizes contextual accuracy, interpretability, and rewrite quality while maintaining flexibility for future model updates.
@@ -15,7 +15,7 @@ The architecture follows a linear yet modular flow:
 4. **Explainability & Scoring** – SHAP-based contribution graphs highlight influential tokens and severity scores are generated.
 5. **Rewriting** – The **Gemini API** rewrites the toxic text into a constructive form.
 6. **Response Composition** – Labels, explanations, and rewritten text are integrated and returned to the user.
-7. **Evaluation & Monitoring** – Model performance is assessed using F1, ROC-AUC, and semantic metrics to ensure rewrite quality and toxicity reduction.
+
 
 This modular architecture allows each component (classification, explainability, rewriting) to evolve independently, simplifying experimentation and model replacement.
 
@@ -89,7 +89,7 @@ This adaptability ensures long-term scalability and compatibility with evolving 
 | **Explainability**  | SHAP values + Attention-based graph | Transparent reasoning          | Token-level contribution visualization                           |
 | **Severity Scorer** | Rule-based scaling                  | Intensity estimation           | Differentiates mild–severe toxicity                              |
 | **Rewriting**       | Gemini API                          | Constructive text rewriting    | Politeness preservation & semantic consistency                   |
-| **Evaluation**      | F1, ROC-AUC, Toxicity Drop          | Model performance & quality    | Ensures fairness and meaning retention                           |
+| **Evaluation**      | F1, ROC-AUC                         | Model performance & quality    | Ensures fairness and meaning retention                           |
 
 
 
