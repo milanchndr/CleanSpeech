@@ -71,15 +71,7 @@ Within mDeBERTa-v3, the architecture follows the **standard transformer encoder 
 
 To handle **multi-label imbalance**, the model uses **Weighted Binary Cross-Entropy Loss (WBCE)**:
 
-[
-\mathcal{L} = - \frac{1}{N} \sum_{i=1}^{N} \sum_{c=1}^{C} w_c \left[ y_{ic} \log(\hat{y}*{ic}) + (1 - y*{ic}) \log(1 - \hat{y}_{ic}) \right]
-]
-
-Where:
-
-* ( y_{ic} ): true label for class *c*
-* ( \hat{y}_{ic} ): predicted probability
-* ( w_c ): class-specific weight to address label imbalance
+![Weighted Binary Cross-Entropy Loss](formula.png)
 
 This ensures severe but underrepresented toxicity classes (like `threat` or `identity_hate`) are not overshadowed by frequent mild categories.
 
