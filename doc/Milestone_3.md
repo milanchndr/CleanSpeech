@@ -23,7 +23,7 @@ This modular design ensures interpretability and maintainability—each componen
 
 ## **2. Choice of Base Model: mDeBERTa-v3**
 
-**Model:** *Multilingual DeBERTa-v3 (mDeBERTa)*
+**Model:** *Multilingual DeBERTa-v3 (mDeBERTa)* or
 **Task:** Multi-label toxicity detection (`toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`)
 
 ### **Justification**
@@ -32,6 +32,8 @@ This modular design ensures interpretability and maintainability—each componen
 * **Superior Contextual Representation:** The enhanced masked decoder and replaced-token detection (RTD) reduce false positives and improve semantic sensitivity.
 * **Multilingual Capability:** Handles English and code-mixed (Hindi-English) data natively.
 * **Proven Performance:** Consistently achieves SOTA results across GLUE/SuperGLUE tasks, ensuring robustness for complex language moderation.
+
+Although **mDeBERTa-v3** is currently the selected backbone, the architecture is designed for modularity. During the **testing phase**, the team may experiment with **ModernBERT** as an alternative encoder. If ModernBERT demonstrates superior contextual performance or inference efficiency, it may replace mDeBERTa in the classifier module without altering the downstream components (explainability and rewriting).
 
 ---
 
