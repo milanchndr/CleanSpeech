@@ -22,45 +22,61 @@ The system aims to identify different types of toxicity (toxic, obscene, insult,
 |------------|--------------|--------|
 | 1. Problem Definition & Literature Review | Defined objectives and reviewed existing toxicity detection methods. | Completed |
 | 2. Data Preparation & Preprocessing | Cleaned dataset, handled duplicates, created `clean_text`, and generated train/val/test splits. | Completed |
-| 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | In Progress |
-| 4. Model Training & Evaluation | To be performed after architecture finalization. | Pending |
+| 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | Completed |
+| 4. Model Training & Evaluation | To be performed after architecture finalization. | In Progress |
 | 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | Planned |
 
 ---
 
-## Streamlit UI (Coming Soon)
-A user-friendly web interface will allow:
-- Entering comments to detect and rewrite toxic text  
-- Viewing model predictions, category-wise scores, and explanation highlights  
-- Real-time demonstration of the toxicity rewriting process
+## Streamlit UI
+The CleanSpeech project includes a Streamlit-based user interface for easy interaction with the toxicity detection and rewriting models. The UI allows users to input text, view toxicity predictions, explanations, and rewritten non-toxic versions.
 
 ---
 
 ## Repository Structure
 
 ```text
+
 CleanSpeech/
-│
-├── doc/
-│   ├── Milestone 1.md
-│   └── Milestone 2.md
-│
-├── src/
-│   ├── eda.ipynb               # Exploratory Data Analysis
-│   ├── prep.ipynb              # Data Preparation & Cleaning
-│   ├── baseline.ipynb          # Baseline Model
-│   └── data/
-│       ├── train_data.csv
-│       ├── test_data.csv
-│       ├── clean_train.csv
-│       ├── clean_val.csv
-│       └── clean_test.csv
-│
-└── ui/
-    ├── app.py                  # Streamlit Interface
-    └── requirements.txt        # UI Dependencies
-
-
+|   .gitignore
+|   README.md
+|
++---doc
+|       architecture.jpg
+|       architecture.png
+|       formula.png
+|       Milestone 1.md
+|       milestone_2.md
+|       Milestone_3.md
+|
++---src
+|   |   baseline.ipynb
+|   |   base_exp.ipynb
+|   |   eda.ipynb
+|   |   HASOC_Preparation.ipynb
+|   |   prep.ipynb
+|   |
+|   +---data
+|   |       clean_test.csv
+|   |       clean_train.csv
+|   |       clean_val.csv
+|   |       test_data.csv
+|   |       train_data.csv
+|   |
+|   \---models
+|           baseline_meta.json
+|           baseline_pipeline.joblib
+|
+\---ui
+    |   app.py
+    |   charts.py
+    |   components.py
+    |   config.py
+    |   explain.py
+    |   inference.py
+    |   paths.py
+    |   requirements.txt
+    |   __init__.py
 
 ### Folder Descriptions
 
@@ -68,14 +84,15 @@ CleanSpeech/
 |:--------|:-------------|
 | doc/ | Contains project milestone documents and progress reports. |
 | src/ | Source notebooks for analysis, preprocessing, and modeling, along with data files. |
+| src/data/ | Processed datasets for training, validation, and testing. |
+| src/models/ | Saved model artifacts including pipelines and metadata. |
 | ui/ | Streamlit-based user interface for running and visualizing model outputs. |
 
 ---
 
 ## Next Steps
-- Finalize baseline (TF-IDF + Logistic Regression)  
-- Begin transformer model design  
-- Integrate results into Streamlit UI  
+- Finalize model architecture and begin training.
+- Develop and integrate the Streamlit UI for user interaction.  
 
 ---
 
