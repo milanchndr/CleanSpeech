@@ -59,62 +59,65 @@ The CleanSpeech project includes a Streamlit-based user interface for easy inter
 ## Repository Structure
 
 ```text
+CleanSpeech  
+│   .gitignore                 ← Ignore unnecessary files in version control  
+│   README.md                  ← Project overview and usage guide  
+│
+├── doc                        ← Documentation for each project milestone  
+│   ├── milestone-1            ← Problem definition & literature review  
+│   │       Milestone 1.md  
+│   │
+│   ├── milestone-2            ← Data preprocessing & exploratory analysis  
+│   │       classify.png  
+│   │       explain.png  
+│   │       milestone_2.md  
+│   │
+│   ├── milestone-3            ← Baseline model (TF-IDF + Logistic Regression)  
+│   │       diagram.png  
+│   │       formula.png  
+│   │       mDeBERTa.png  
+│   │       Milestone_3.md  
+│   │
+│   ├── milestone-4            ← Transformer-based model training (DeBERTa)  
+│   │       milestone-4.md  
+│   │
+│   └── milestone-5            ← Explainability & text rewriting stage  
+│
+├── src                        ← Core data science and modeling pipeline  
+│   ├── data                   ← Raw and cleaned dataset splits  
+│   │       clean_test.csv  
+│   │       clean_train.csv  
+│   │       clean_val.csv  
+│   │       test_data.csv  
+│   │       train_data.csv  
+│   │
+│   ├── mdeberta-v3-base       ← Transformer fine-tuning scripts & experiments  
+│   │       HASOC_Preparation.ipynb  
+│   │       toxic_comment_classification.py  
+│   │
+│   ├── model-artifacts        ← Saved baseline model and metadata  
+│   │   └── tf-idf-log-reg  
+│   │           baseline_meta.json  
+│   │           baseline_pipeline.joblib  
+│   │
+│   └── tf-idf-logistic-reg    ← Baseline notebooks for preprocessing & training  
+│           eda.ipynb  
+│           explain.ipynb  
+│           preprocess.ipynb  
+│           train-infer.ipynb  
+│
+└── ui                         ← Streamlit-based front-end for predictions & explainability  
+    │   app.py                 
+    │   charts.py              
+    │   components.py          
+    │   config.py               
+    │   explain.py               
+    │   inference.py           
+    │   paths.py                
+    │   requirements.txt       
+    │   __init__.py              
 
-CleanSpeech/
-|   .gitignore
-|   README.md
-|
-+---doc
-|       architecture.jpg
-|       architecture.png
-|       classify.png
-|       explain.png
-|       formula.png
-|       Milestone 1.md
-|       milestone_2.md
-|       Milestone_3.md
-|       milestone_3_temp.md
-|
-+---src
-|   |   baseline.ipynb
-|   |   base_exp.ipynb
-|   |   eda.ipynb
-|   |   HASOC_Preparation.ipynb
-|   |   prep.ipynb
-|   |
-|   +---data
-|   |       clean_test.csv
-|   |       clean_train.csv
-|   |       clean_val.csv
-|   |       test_data.csv
-|   |       train_data.csv
-|   |
-|   \---models
-|           baseline_meta.json
-|           baseline_pipeline.joblib
-|
-\---ui
-    |   app.py
-    |   charts.py
-    |   components.py
-    |   config.py
-    |   explain.py
-    |   inference.py
-    |   paths.py
-    |   requirements.txt
-    |   __init__.py
 ```
-
----
-
-## Folder Descriptions
-| Folder | Description |
-|:--------|:-------------|
-| doc/ | Contains project milestone documents and progress reports. |
-| src/ | Source notebooks for analysis, preprocessing, and modeling, along with data files. |
-| src/data/ | Processed datasets for training, validation, and testing. |
-| src/models/ | Saved model artifacts including pipelines and metadata. |
-| ui/ | Streamlit-based user interface for running and visualizing model outputs. |
 
 ---
 
