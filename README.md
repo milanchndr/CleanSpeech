@@ -44,10 +44,13 @@ CleanSpeech/
 +---doc
 |       architecture.jpg
 |       architecture.png
+|       classify.png
+|       explain.png
 |       formula.png
 |       Milestone 1.md
 |       milestone_2.md
 |       Milestone_3.md
+|       milestone_3_temp.md
 |
 +---src
 |   |   baseline.ipynb
@@ -90,7 +93,7 @@ CleanSpeech/
 
 ---
 
-## Next Steps
+## Ongoing Steps:
 - Finalize model architecture and begin training.
 - Develop and integrate the Streamlit UI for user interaction.  
 
