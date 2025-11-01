@@ -1,6 +1,6 @@
 # **Milestone 3: Architecture Justification**
 
-![Architecture Diagram](architecture.png)
+![Architecture Diagram](diagram.png)
 
 ---
 
