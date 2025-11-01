@@ -162,8 +162,8 @@ criterion = WeightedBCEWithLogitsLoss(torch.tensor(class_weights.values))
 
 | Artifact | Description |
 |:-----------|:-------------|
-| **`best_model/`** | Saved checkpoint (epoch 3) – Hugging Face format |
-| **`tokenizer/`** | Matching DeBERTa tokenizer |
+| **`best_model/`** | Saved checkpoint (epoch 5) – Hugging Face safetensors format |
+| **`tokenizer/`** | DeBERTa's tokenizer |
 | **`toxic-comment-classification.ipynb`** | Main training notebook |
 | **`submission.csv`** | Kaggle test predictions |
 | **`src/models/baseline_pipeline.joblib`** | TF-IDF + Logistic Regression baseline |
@@ -176,25 +176,19 @@ Training reproducible across multi-GPU runs via Hugging Face Accelerate.
 
 ---
 
-## 9. **Observations / Notes for Next Milestone**
 
-#### **Early Indications of Model Performance**
+### **Observations / Notes for Next Milestone**
 
-*   **Strong Predictive Power:** The model achieved an excellent macro ROC-AUC of **0.989** on the validation set. This metric is particularly important at this stage as it evaluates the quality of the model's raw probability outputs, independent of any specific decision threshold. It confirms the model is highly effective at distinguishing between toxic and non-toxic content.
-*   **Stable and Efficient Training:** The training process was stable, with smooth loss curves and no signs of divergence. Early stopping correctly triggered at epoch 3, preventing overfitting and confirming our regularization strategy was effective.
-*   **Successful Baseline Improvement:** This transformer-based model represents a significant performance leap over the TF-IDF + Logistic Regression baseline from Milestone 3, establishing a state-of-the-art foundation for the next project phases.
+#### **Key Findings**
+*   **Strong Performance:** The model achieved an excellent macro ROC-AUC of **0.989** on test dataset, confirming its ability to generate high-quality toxicity probabilities before any thresholding.
+*   **Stable Training:** The training process was stable and well-regularized, with early stopping successfully preventing overfitting and outperforming the previous baseline model.
 
-#### **Issues or Unexpected Behavior Observed During Training**
+#### **Challenges & Limitations**
+*   **Threshold Dependency:** A single, fixed decision threshold (e.g., 0.5) is suboptimal for final classification, particularly for rare labels and ambiguous or sarcastic comments.
 
-*   **Threshold-Dependence of Final Predictions:** While the underlying probabilities are strong, applying a naive default threshold of 0.5 for all labels results in suboptimal performance on precision/recall-based metrics. This is especially true for rare classes, where a lower threshold might be needed to achieve reasonable recall.
-*   **Under-confidence on Ambiguous Comments:** The model sometimes assigns moderate probabilities (e.g., 0.3-0.6) to comments that are sarcastic or subtly toxic. These borderline cases are the primary source of classification errors when using a fixed threshold.
-
-#### **Ideas for Further Tuning or Improvements to be Explored in Milestone 5**
-
-1.  **Introduce Threshold-Dependent Metrics:** Evaluate the model using a comprehensive suite of metrics including Precision, Recall, and F1-score to understand the practical trade-offs of different decision boundaries.
-2.  **Tune Per-Label Decision Thresholds:** Perform a systematic search on the validation set to find the optimal probability threshold for each toxicity label individually. The goal will be to maximize a metric like the macro F1-score, which balances precision and recall across all classes.
-3.  **Perform Detailed Error Analysis:** Manually review misclassified examples from the validation set to identify patterns and common failure modes (e.g., difficulty with sarcasm, context-dependent insults). This will inform potential data augmentation or model refinement strategies.
-4.  **Implement Explainability (XAI):** Begin implementing explainability techniques like SHAP or attention visualization to interpret model predictions. This is a critical step before moving to text rewriting, as it helps ensure the model is focusing on relevant toxic cues.
-5.  **Integrate and Prototype:** Integrate the saved `best_model` into the Streamlit UI for live inference and begin prototyping the text rewriting workflow using the Gemini API.
-
+#### **Next Steps (Milestone 5 Plan)**
+*   **Evaluate with Threshold Metrics:** Introduce Precision, Recall, and F1-score to assess practical performance.
+*   **Tune Decision Thresholds:** Optimize the probability threshold for each label individually on the validation set to maximize the F1-score.
+*   **Implement Explainability (XAI):** Use SHAP or attention analysis to interpret model predictions.
+*   **Integrate for Rewriting:** Integrate the fine-tuned model into the Streamlit UI and begin text rewriting (Gemini API) integration.
 
