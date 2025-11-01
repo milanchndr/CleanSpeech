@@ -24,11 +24,10 @@ CleanSpeech
   <img src="https://img.shields.io/badge/Explainability-SHAP%20%2F%20LIME-purple?style=flat-square"/>
 </p>
 
----
 
-## Overview
-CleanSpeech is an academic DS-Lab project (Team-10) focused on building an AI system that detects and rewrites toxic text using explainable models.  
-The system aims to identify different types of toxicity (toxic, obscene, insult, threat, identity hate, etc.) and provide meaningful, non-toxic reformulations.
+> CleanSpeech fine-tunes **mDeBERTa-v3-base** for multi-label toxicity classification and  
+> uses **Gemini API** to rewrite harmful text into non-toxic alternatives.  
+> A Streamlit UI provides real-time predictions and **SHAP-based explainability**.
 
 ---
 
@@ -51,8 +50,12 @@ The system aims to identify different types of toxicity (toxic, obscene, insult,
 
 ---
 
-## Streamlit UI
-The CleanSpeech project includes a Streamlit-based user interface for easy interaction with the toxicity detection and rewriting models. The UI allows users to input text, view toxicity predictions, explanations, and rewritten non-toxic versions.
+## Streamlit Interface
+The **CleanSpeech UI** enables users to:
+- Enter free-form text.
+- View toxicity predictions with probability bars.
+- Inspect model explanations (SHAP/LIME visualization).
+- Generate **non-toxic rewrites** using the Gemini API.
 
 ---
 
@@ -117,6 +120,15 @@ CleanSpeech
     │   requirements.txt       
     │   __init__.py              
 
+```
+---
+
+## Getting Started
+_Run locally:_
+```bash
+cd ui
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
 ---
