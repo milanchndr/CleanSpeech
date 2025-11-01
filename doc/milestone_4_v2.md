@@ -135,15 +135,16 @@ criterion = WeightedBCEWithLogitsLoss(torch.tensor(class_weights.values))
 
 ## 7. Initial Training Results
 
-| Label | ROC-AUC | F1 at (0.5 threshold, NOT OPTIMAL)
-|:-------|:---------|
-| toxic | 0.97 |0.68
-| severe_toxic | 0.98 |0.42 
-| obscene | 0.98 |0.71
-| threat | 0.99 |0.54 
-| insult | 0.97 |0.66 
-| identity_hate | 0.98 |0.59 
-| **Macro Average** | **0.982** |**0.60**
+| Label           | ROC-AUC | F1 (at 0.5 threshold, not optimal) |
+|:----------------|:--------|:----------------------------------:|
+| toxic           | 0.97    | 0.68 |
+| severe_toxic    | 0.98    | 0.42 |
+| obscene         | 0.98    | 0.71 |
+| threat          | 0.99    | 0.54 |
+| insult          | 0.97    | 0.66 |
+| identity_hate   | 0.98    | 0.59 |
+| **Macro Average** | **0.982** | **0.60** |
+
 
 **Observations**
 - Validation AUC peaked at epoch 3 → early stopping triggered correctly.  
