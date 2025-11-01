@@ -1,16 +1,6 @@
 <div align="center">
 
-<h1 style="
-  font-size: 2.5em;
-  font-weight: 800;
-  color: #d7fac7ff;
-  background-color: #4e4747ff;
-  padding: 10px 25px;
-  border-radius: 8px;
-  display: inline-block;
-">
-CleanSpeech
-</h1>
+<h1 style="align=center; font-size: 2.5em; font-weight: 800; color: #d8faacff; background-color: #4e4747ff; padding: 10px 25px; border-radius: 8px; display: inline-block;">CleanSpeech</h1>
 
 <p><i>Toxicity Detection and Rewriting with Explainable AI</i></p>
 
