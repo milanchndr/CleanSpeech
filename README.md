@@ -1,5 +1,20 @@
-<h1 align="center">CleanSpeech</h1>
-<h3 align="center">Toxicity Detection & Rewriting with Explainable AI</h3>
+<div align="center">
+
+<h1 style="
+  font-size: 2.5em;
+  font-weight: 800;
+  color: #d7fac7ff;
+  background-color: #4e4747ff;
+  padding: 10px 25px;
+  border-radius: 8px;
+  display: inline-block;
+">
+CleanSpeech
+</h1>
+
+<p><i>Toxicity Detection and Rewriting with Explainable AI</i></p>
+
+</div>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Domain-NLP-blue?style=flat-square"/>
