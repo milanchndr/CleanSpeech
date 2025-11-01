@@ -178,7 +178,7 @@ Training reproducible across multi-GPU runs via Hugging Face Accelerate.
 ---
 
 
-### **Observations / Notes for Next Milestone**
+## 9. **Observations / Notes for Next Milestone**
 
 #### **Key Findings**
 *   **Strong Performance:** The model achieved an excellent macro ROC-AUC of **0.989** on test dataset, confirming its ability to generate high-quality toxicity probabilities before any thresholding.
