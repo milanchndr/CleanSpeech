@@ -29,13 +29,13 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 
 """# Installing and Importing Libraries"""
 
-!pip install -q --upgrade \
-    transformers \
-    tokenizers \
-    datasets \
-    evaluate \
-    accelerate \
-    torchmetrics
+#!pip install -q --upgrade \
+    # transformers \
+    # tokenizers \
+    # datasets \
+    # evaluate \
+    # accelerate \
+    # torchmetrics
 
 import os
 import torch
