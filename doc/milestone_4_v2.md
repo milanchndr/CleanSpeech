@@ -165,9 +165,10 @@ criterion = WeightedBCEWithLogitsLoss(torch.tensor(class_weights.values))
 | **`best_model/`** | Saved checkpoint (epoch 5) – Hugging Face safetensors format |
 | **`tokenizer/`** | DeBERTa's tokenizer |
 | **`toxic-comment-classification.ipynb`** | Main training notebook |
-| **`submission.csv`** | Kaggle test predictions |
+| **`Inference`** | Inference notebook |
 | **`src/models/baseline_pipeline.joblib`** | TF-IDF + Logistic Regression baseline |
 | **`baseline_meta.json`** | Metadata for baseline model (UI reference) |
+| **`Fine Tuned Model Weights`** | https://www.kaggle.com/code/datam0nstr/toxic-comment-classification/output |
 
 All runs fixed `seed = 42` for reproducibility.  
 Training reproducible across multi-GPU runs via Hugging Face Accelerate.
