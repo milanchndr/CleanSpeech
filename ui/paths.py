@@ -18,6 +18,6 @@ def get_models_dir(root: Path) -> Path:
     """
     Return the models directory under src/models, ensuring it exists.
     """
-    models_dir = root / "src" / "models"
+    models_dir = root / "src" / "model-artifacts" / "tf-idf-log-reg"
     models_dir.mkdir(parents=True, exist_ok=True)
     return models_dir
