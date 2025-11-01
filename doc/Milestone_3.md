@@ -1,8 +1,12 @@
 # **Milestone 3: Architecture Justification**
 
 ![Architecture Diagram](diagram.png)
+**Figure:** CleanSpeech System Architecture Overview
 
 ---
+
+![mDeBERTa Architecture](mDeBERTa.png)
+**Figure:** mDeBERTa-v3 Transformer Architecture
 
 ## **1. Overall Design Rationale**
 

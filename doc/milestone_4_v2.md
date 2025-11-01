@@ -1,4 +1,4 @@
-# Model Training
+# Milestone 4: Model Training
 **CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
 
 ---
