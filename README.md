@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1 style="align=center; font-size: 2.5em; font-weight: 800; color: #d8faacff; background-color: #4e4747ff; padding: 10px 25px; border-radius: 8px; display: inline-block;">CleanSpeech</h1>
+<h1 style="align=center">CleanSpeech</h1>
 
 <p><i>Toxicity Detection and Rewriting with Explainable AI</i></p>
 
@@ -16,7 +16,7 @@
 
 
 > CleanSpeech fine-tunes **mDeBERTa-v3-base** for multi-label toxicity classification and  
-> uses **Gemini API** to rewrite harmful text into non-toxic alternatives.  
+> uses **Gemini API** to rewrite harmful text into non-toxic alternatives.
 > A Streamlit UI provides real-time predictions and **SHAP-based explainability**.
 
 ---
