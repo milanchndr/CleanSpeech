@@ -176,7 +176,7 @@ Training reproducible across multi-GPU runs via Hugging Face Accelerate.
 
 ---
 
-### **Observations / Notes for Next Milestone**
+## 9. **Observations / Notes for Next Milestone**
 
 #### **Early Indications of Model Performance**
 
