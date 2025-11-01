@@ -1,5 +1,13 @@
-# CleanSpeech
-**CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
+<h1 align="center">CleanSpeech</h1>
+<h3 align="center">Toxicity Detection & Rewriting with Explainable AI</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Domain-NLP-blue?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Classifier-HuggingFace%20(mDeBERTa)-orange?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Rewriter-Gemini%20API-red?style=flat-square"/>
+  <img src="https://img.shields.io/badge/UI-Streamlit-brightgreen?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Explainability-SHAP%20%2F%20LIME-purple?style=flat-square"/>
+</p>
 
 ---
 
@@ -20,11 +28,11 @@ The system aims to identify different types of toxicity (toxic, obscene, insult,
 ## Current Progress
 | Milestone | Description | Status |
 |------------|--------------|--------|
-| 1. Problem Definition & Literature Review | Defined objectives and reviewed existing toxicity detection methods. | Completed |
-| 2. Data Preparation & Preprocessing | Cleaned dataset, handled duplicates, created `clean_text`, and generated train/val/test splits. | Completed |
-| 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | Completed |
-| 4. Model Training & Evaluation | To be performed after architecture finalization. | In Progress |
-| 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | Planned |
+| 1. Problem Definition & Literature Review | Defined objectives and reviewed existing toxicity detection methods. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 2. Data Preparation & Preprocessing | Cleaned dataset, handled duplicates, created `clean_text`, and generated train/val/test splits. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 4. Model Training & Evaluation | To be performed after architecture finalization. | ![In Progress](https://img.shields.io/badge/-In%20Progress-yellow) |
+| 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | ![Planned](https://img.shields.io/badge/-Planned-lightgrey) |
 
 ---
 
@@ -99,4 +107,4 @@ CleanSpeech/
 
 ---
 
-*Maintained by Team-10, DS-Lab Project: CleanSpeech.*
+<p align="center"> <b>Maintained by Team-10 · DS-Lab Project: CleanSpeech</b><br/> <sub>IIT Madras · Data Science & Applications Program</sub> </p>
