@@ -62,7 +62,7 @@ text = re.sub(r"\s+", " ", text).strip()
 |:-----------|:-------------|
 | **Backbone** | `microsoft/mdeberta-v3-base` (183 M parameters) |
 | **Input Length** | Up to 256 tokens |
-| **Output** | 6 logits (sigmoid activations for multi-label) |
+| **Output** |6 logits. These are passed through a sigmoid function to produce independent probabilities (0 to 1) for each of the six toxicity labels. |
 | **Problem Type** | `multi_label_classification` |
 | **Fine-tuning** | All layers trainable + new classification head |
 
@@ -135,15 +135,15 @@ criterion = WeightedBCEWithLogitsLoss(torch.tensor(class_weights.values))
 
 ## 7. Initial Training Results
 
-| Label | ROC-AUC |
+| Label | ROC-AUC | F1 at (0.5 threshold, NOT OPTIMAL)
 |:-------|:---------|
-| toxic | 0.985 |
-| severe_toxic | 0.992 |
-| obscene | 0.994 |
-| threat | 0.981 |
-| insult | 0.989 |
-| identity_hate | 0.984 |
-| **Macro Average** | **0.989** |
+| toxic | 0.97 |0.68
+| severe_toxic | 0.98 |0.42 
+| obscene | 0.98 |0.71
+| threat | 0.99 |0.54 
+| insult | 0.97 |0.66 
+| identity_hate | 0.98 |0.59 
+| **Macro Average** | **0.982** |**0.60**
 
 **Observations**
 - Validation AUC peaked at epoch 3 → early stopping triggered correctly.  
@@ -151,7 +151,7 @@ criterion = WeightedBCEWithLogitsLoss(torch.tensor(class_weights.values))
 - Model remained stable under mixed precision and gradient clipping.
 
 **Qualitative Example**
-> “You are a disgusting idiot.” → Predicted labels: **toxic + insult**
+> “You are a disgusting idiot.” → Example Probabilities: {'toxic': 0.98, 'severe_toxic': 0.15, 'obscene': 0.85, 'threat': 0.01, 'insult': 0.95, 'identity_hate': 0.05}
 
 > _Summary:_ The model achieved near state-of-the-art AUC values across all classes with consistent convergence and balanced predictions.
 
