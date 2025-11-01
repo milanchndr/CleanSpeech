@@ -88,9 +88,11 @@ CleanSpeech/
     |   paths.py
     |   requirements.txt
     |   __init__.py
+```
 
-### Folder Descriptions
+---
 
+## Folder Descriptions
 | Folder | Description |
 |:--------|:-------------|
 | doc/ | Contains project milestone documents and progress reports. |
@@ -107,4 +109,4 @@ CleanSpeech/
 
 ---
 
-<p align="center"> <b>Maintained by Team-10 · DS-Lab Project: CleanSpeech</b><br/> <sub>IIT Madras · Data Science & Applications Program</sub> </p>
+<p align="center"> <b>Maintained by Team-10 · DS-Lab Project: CleanSpeech</b><br/> <sub>IIT Madras · Data Science and Applications Program</sub> </p>
