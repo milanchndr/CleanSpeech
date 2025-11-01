@@ -176,25 +176,25 @@ Training reproducible across multi-GPU runs via Hugging Face Accelerate.
 
 ---
 
-## 9. Observations / Next Milestone Plan
+### **Observations / Notes for Next Milestone**
 
-### **Key Findings**
-- Weighted BCE + AdamW → stable convergence and balanced gradients.  
-- Early stopping prevented overfitting and reduced training time.  
-- Increasing context length (256 tokens) improved nuanced toxicity detection.
+#### **Early Indications of Model Performance**
 
-### **Challenges**
-- Slight under-confidence on borderline comments.  
-- Single threshold (0.5) not optimal for all labels — needs tuning.
+*   **Strong Predictive Power:** The model achieved an excellent macro ROC-AUC of **0.989** on the validation set. This metric is particularly important at this stage as it evaluates the quality of the model's raw probability outputs, independent of any specific decision threshold. It confirms the model is highly effective at distinguishing between toxic and non-toxic content.
+*   **Stable and Efficient Training:** The training process was stable, with smooth loss curves and no signs of divergence. Early stopping correctly triggered at epoch 3, preventing overfitting and confirming our regularization strategy was effective.
+*   **Successful Baseline Improvement:** This transformer-based model represents a significant performance leap over the TF-IDF + Logistic Regression baseline from Milestone 3, establishing a state-of-the-art foundation for the next project phases.
 
-### **Next Steps → Milestone 5**
-1. Add **Precision, Recall, and F1** metrics (threshold-based).  
-2. Tune **per-label thresholds** to maximize macro F1.  
-3. Include **PR-AUC** for imbalanced dataset evaluation.  
-4. Implement **SHAP / Attention heatmaps** for explainability.  
-5. Integrate fine-tuned model into Streamlit UI.  
-6. Begin **text rewriting (Gemini API)** integration.
+#### **Issues or Unexpected Behavior Observed During Training**
 
-> _Forward Direction:_ Transition from high-performing model training to **interpretability and responsible text rewriting**, maintaining transparency and control over AI predictions.
+*   **Threshold-Dependence of Final Predictions:** While the underlying probabilities are strong, applying a naive default threshold of 0.5 for all labels results in suboptimal performance on precision/recall-based metrics. This is especially true for rare classes, where a lower threshold might be needed to achieve reasonable recall.
+*   **Under-confidence on Ambiguous Comments:** The model sometimes assigns moderate probabilities (e.g., 0.3-0.6) to comments that are sarcastic or subtly toxic. These borderline cases are the primary source of classification errors when using a fixed threshold.
+
+#### **Ideas for Further Tuning or Improvements to be Explored in Milestone 5**
+
+1.  **Introduce Threshold-Dependent Metrics:** Evaluate the model using a comprehensive suite of metrics including Precision, Recall, and F1-score to understand the practical trade-offs of different decision boundaries.
+2.  **Tune Per-Label Decision Thresholds:** Perform a systematic search on the validation set to find the optimal probability threshold for each toxicity label individually. The goal will be to maximize a metric like the macro F1-score, which balances precision and recall across all classes.
+3.  **Perform Detailed Error Analysis:** Manually review misclassified examples from the validation set to identify patterns and common failure modes (e.g., difficulty with sarcasm, context-dependent insults). This will inform potential data augmentation or model refinement strategies.
+4.  **Implement Explainability (XAI):** Begin implementing explainability techniques like SHAP or attention visualization to interpret model predictions. This is a critical step before moving to text rewriting, as it helps ensure the model is focusing on relevant toxic cues.
+5.  **Integrate and Prototype:** Integrate the saved `best_model` into the Streamlit UI for live inference and begin prototyping the text rewriting workflow using the Gemini API.
 
 
