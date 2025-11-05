@@ -4,19 +4,19 @@
 <body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
   <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
   <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
-  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.102</b></div>
-  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.0083</div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.000</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.1158</div>
   
     <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
-      <div style="margin-bottom:8px;"><b>Legend</b> — blue: pushes <i>up</i> (positive), red: pulls <i>down</i> (negative); intensity ∝ |SHAP|</div>
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
       <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">positive ↑</span>
-        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">negative ↓</span>
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
       </div>
     </div>
     
   <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
-    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15000006706167304);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.46080657828185856);">Have</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.29865530888233205);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.3996379832778796);">a</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7499992799307685);"> nice</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15456384862888595);"> day</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7159774513642613);">!</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15000107298676887);"></span>
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000001524165543);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.41108232007267875);">I</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.7499999481806513);"> love</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.4969146914670144);"> the</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.536004084621678);"> way</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20522222042642294);"> you</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.21327701476490837);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.5454502877612155);">explain</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.3794022375262018);">ed</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.3152057075501447);"> that</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.42349815418891446);"> concept</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.4457828910270034);">!</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15000000150814152);"></span>
   </div>
 </body>
 </html>

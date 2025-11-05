@@ -4,19 +4,19 @@
 <body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
   <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
   <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
-  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.083</b></div>
-  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.0069</div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.897</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.6761</div>
   
     <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
-      <div style="margin-bottom:8px;"><b>Legend</b> — blue: pushes <i>up</i> (positive), red: pulls <i>down</i> (negative); intensity ∝ |SHAP|</div>
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
       <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">positive ↑</span>
-        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">negative ↓</span>
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
       </div>
     </div>
     
   <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
-    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.1500001613540566);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.45375308577991724);">This</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7499991337370047);"> is</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.36891832647665473);"> the</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.3682822889547098);"> dum</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.5660693654680987);">best</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.5525856725417229);"> thing</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.231553322023008);"> I</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.5397469521181774);">&#x27;</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.35495873992953086);">ve</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.40137513868972663);"> read</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.3359203730961884);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.1500022589567927);"></span>
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000000431308516);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.1764268342942444);">This</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.17880137830440512);"> is</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.17526656441047955);"> the</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7499999911259594);"> dum</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15628223660046836);">best</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20354208035022348);"> thing</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.18665767465385788);"> I</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.16733533990588934);">&#x27;</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.16144917723144464);">ve</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.23566507888612886);"> read</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20174728295577612);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15);"></span>
   </div>
 </body>
 </html>
