@@ -53,63 +53,93 @@ The **CleanSpeech UI** enables users to:
 
 ```text
 CleanSpeech  
-│   .gitignore                 ← Ignore unnecessary files in version control  
-│   README.md                  ← Project overview and usage guide  
+│   .gitignore               ← Ignore large model files and virtual envs  
+│   README.md                ← Project overview and usage guide  
 │
-├── doc                        ← Documentation for each project milestone  
-│   ├── milestone-1            ← Problem definition & literature review  
+├── doc                      ← Documentation for each milestone  
+│   ├── milestone-1          ← Problem definition & literature review  
 │   │       Milestone 1.md  
 │   │
-│   ├── milestone-2            ← Data preprocessing & exploratory analysis  
+│   ├── milestone-2          ← Data preprocessing & exploratory analysis  
 │   │       classify.png  
 │   │       explain.png  
 │   │       milestone_2.md  
 │   │
-│   ├── milestone-3            ← Baseline model (TF-IDF + Logistic Regression)  
+│   ├── milestone-3          ← Baseline model (TF-IDF + Logistic Regression)  
 │   │       diagram.png  
 │   │       formula.png  
 │   │       mDeBERTa.png  
 │   │       Milestone_3.md  
 │   │
-│   ├── milestone-4            ← Transformer-based model training (DeBERTa)  
+│   ├── milestone-4          ← Transformer-based model training (mDeBERTa-v3)  
 │   │       milestone-4.md  
 │   │
-│   └── milestone-5            ← Explainability & text rewriting stage  
+│   └── milestone-5          ← Explainability & text rewriting  
 │
-├── src                        ← Core data science and modeling pipeline  
-│   ├── data                   ← Raw and cleaned dataset splits  
-│   │       clean_test.csv  
+├── src                      ← Core data science and modeling pipeline  
+│   ├── data                 ← Raw and cleaned dataset splits  
 │   │       clean_train.csv  
 │   │       clean_val.csv  
-│   │       test_data.csv  
+│   │       clean_test.csv  
 │   │       train_data.csv  
+│   │       test_data.csv  
 │   │
-│   ├── mdeberta-v3-base       ← Transformer fine-tuning scripts & experiments  
-│   │       HASOC_Preparation.ipynb  
-│   │       toxic_comment_classification.py  
+│   ├── mdeberta-v3-base     ← Transformer fine-tuning, inference & explainability  
+│   │   ├── code             ← Modular notebooks for the pipeline  
+│   │   │       00_config.ipynb  
+│   │   │       01_data.ipynb  
+│   │   │       02_modeling.ipynb  
+│   │   │       03_train.ipynb  
+│   │   │       04_infer.ipynb  
+│   │   │       05_explain.ipynb  
+│   │   │
+│   │   ├── models           ← Fine-tuned DeBERTa model (ignored in Git)  
+│   │   │   └── best  
+│   │   │           config.json  
+│   │   │           tokenizer.json  
+│   │   │           model.safetensors  
+│   │   │
+│   │   ├── notebooks-test   ← Experimental and test notebooks  
+│   │   │       HASOC_Preparation.ipynb  
+│   │   │       train-v2.ipynb  
+│   │   │       toxic_comment_classification.py  
+│   │   │       toxic_comment_classification_inference.ipynb  
+│   │   │
+│   │   └── reports          ← Metrics, SHAP explanations, and preview data  
+│   │       │   config_snapshot.json  
+│   │       │
+│   │       ├── figs         ← Generated SHAP HTML visualizations  
+│   │       │   └── shap_gallery_toxic  
+│   │       │           index.html  
+│   │       │           shap_toxic_01.html ... shap_toxic_05.html  
+│   │       │
+│   │       └── previews     ← Head previews of training & validation splits  
+│   │               train_head.csv  
+│   │               val_head.csv  
 │   │
-│   ├── model-artifacts        ← Saved baseline model and metadata  
+│   ├── model-artifacts      ← Saved baseline (TF-IDF + Logistic Regression) models  
 │   │   └── tf-idf-log-reg  
 │   │           baseline_meta.json  
 │   │           baseline_pipeline.joblib  
 │   │
-│   └── tf-idf-logistic-reg    ← Baseline notebooks for preprocessing & training  
-│           eda.ipynb  
-│           explain.ipynb  
-│           preprocess.ipynb  
-│           train-infer.ipynb  
+│   └── tf-idf-logistic-reg  ← Baseline experimentation notebooks  
+│           01_eda.ipynb  
+│           02_preprocess.ipynb  
+│           03_train-infer.ipynb  
+│           04_explain.ipynb  
 │
-└── ui                         ← Streamlit-based front-end for predictions & explainability  
-    │   app.py                 
-    │   charts.py              
-    │   components.py          
-    │   config.py               
-    │   explain.py               
-    │   inference.py           
-    │   paths.py                
-    │   requirements.txt       
-    │   __init__.py              
-
+└── ui                       ← Streamlit-based interface for prediction & explainability  
+    │   app.py  
+    │   charts.py  
+    │   components.py  
+    │   config.py  
+    │   explain.py  
+    │   inference.py  
+    │   paths.py  
+    │   requirements.txt  
+    │   __init__.py  
+    │
+            
 ```
 ---
 
