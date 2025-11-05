@@ -1,0 +1,28 @@
+{
+  "paths": {
+    "raw_train": "../../data/train_data.csv",
+    "raw_test": "../../data/test_data.csv",
+    "model_dir": "../models/best",
+    "reports_dir": "../reports"
+  },
+  "train": {
+    "model_name": "microsoft/mdeberta-v3-base",
+    "max_len": 256,
+    "batch_size": 16,
+    "lr": 2e-05,
+    "epochs": 6,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "patience": 2,
+    "seed": 42,
+    "class_weighting": "auto"
+  },
+  "labels": [
+    "toxic",
+    "severe_toxic",
+    "obscene",
+    "threat",
+    "insult",
+    "identity_hate"
+  ]
+}
