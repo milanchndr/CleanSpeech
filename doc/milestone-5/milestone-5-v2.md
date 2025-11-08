@@ -1,7 +1,7 @@
-# 🧩 Milestone 5: Model Evaluation & Analysis
+# Milestone 5: Model Evaluation & Analysis
 **CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
 
---
+---
 ## **Milestone overview**
 
 **CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
@@ -125,8 +125,10 @@ Tokenization used `AutoTokenizer` with `max_length=256` and `padding="max_length
 ### **Explainability Visualization**
 
 * Perturbation-based importance scores highlight key words contributing to toxicity.  
-* 🔴 Red → increases toxicity (“idiot”, “hate”); 🔵 Blue → reduces toxicity (“not”, “don’t”).  
-* Cumulative impact plots show how toxicity builds token by token.
+* ![red](https://img.shields.io/badge/Increases%20Toxicity-red) → words like *“idiot”*, *“hate”*  
+* ![blue](https://img.shields.io/badge/Reduces%20Toxicity-blue) → words like *“not”*, *“don’t”*  
+* Cumulative impact plots visualize how toxicity probability builds progressively across tokens.
+
 
 ### **Rewriting Examples (Gemini 2.5)**
 
@@ -196,5 +198,3 @@ python evaluate.py --model_dir best_model --split test
 ```
 
 ---
-
-
