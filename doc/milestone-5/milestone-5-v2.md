@@ -1,124 +1,202 @@
 # 🧩 Milestone 5: Model Evaluation & Analysis
 
 **Project:** CleanSpeech – Toxicity Detection & Rewriting with Explainable AI  
+**Date:** November 7  
 **Model:** `bert-base-uncased` (Fine-tuned)  
-**Focus:** Evaluating model generalization, interpretability, and constructive rewriting effectiveness.
+**Focus:** Evaluation, Explainability, and Rewriting System Performance
 
 ---
 
-## 1. Overview / Objective
+## **1. Overview / Objective**
 
-In **Milestone 4**, we fine-tuned a transformer (`bert-base-uncased`) on the **Jigsaw Toxic Comment Classification** dataset to classify six categories:
+Following **Milestone 4**, the fine-tuned `bert-base-uncased` model trained on the **Jigsaw Toxic Comment Classification** dataset was evaluated in this milestone. The goal was to analyze performance on unseen data, interpret model predictions, and test the integrated rewriting pipeline using Gemini 2.5.
 
-> `toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`
+Key objectives:
 
-**Milestone 5** extends this work by:
-- Evaluating the fine-tuned model on unseen text.
-- Analyzing performance metrics and interpretability.
-- Conducting **error analysis** and **negation tests**.
-- Assessing the **Gemini-based rewriting** system using `BERTScore`.
+* Evaluate model generalization on held-out test data.
+* Perform both **quantitative and qualitative analyses**.
+* Identify systematic weaknesses through **error and explainability studies**.
+* Validate rewrite quality using **BERTScore**.
 
----
-
-## 2. Evaluation Setup
-
-| Component | Description |
-|:--|:--|
-| **Base Model** | `bert-base-uncased` |
-| **Dataset** | Jigsaw Toxic Comment (preprocessed, multi-label) |
-| **Split** | 80/20 train–test |
-| **Frameworks** | PyTorch + Hugging Face Transformers |
-| **Metrics** | Precision, Recall, F1, ROC-AUC |
-| **Explainability** | Custom perturbation-based XAI (word importance, heatmaps) |
-| **Rewriting Evaluation** | `Gemini 2.5 Flash` + `BERTScore` |
+**Re-training:** No full retraining was performed. Label-wise threshold tuning and post-hoc calibration were applied to improve F1 balance across toxicity types.
 
 ---
 
-## 3. Quantitative Results
+## **2. Evaluation Setup**
 
-| Metric | Macro Avg | Micro Avg | Weighted Avg |
-|:--|--:|--:|--:|
-| Precision | 0.91 | 0.93 | 0.92 |
-| Recall | 0.88 | 0.89 | 0.89 |
-| F1-Score | **0.89** | **0.91** | **0.90** |
-| ROC-AUC | — | — | **0.97** |
+### **Dataset Split**
 
-**Highlights:**
-- Excellent discrimination (ROC-AUC 0.97).  
-- Slight recall dip in `threat` and `identity_hate` (class imbalance).  
-- <1% generalization gap → strong test performance.
+| Split             | Samples | Purpose                         |
+| :---------------- | ------: | :------------------------------ |
+| **Train**         |  95,000 | Model fine-tuning (Milestone 4) |
+| **Validation**    |  24,000 | Threshold tuning                |
+| **Test (Unseen)** | 153,000 | Final Evaluation                |
 
----
+Each text instance could have multiple labels:  
+`toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`.
 
-## 4. Explainability & Analysis
+### **Preprocessing**
 
-### **Word-Level XAI**
-- Perturbation-based explanation computed via leave-one-out masking.
-- 🔴 Words increasing toxicity (e.g., “idiot”, “hate”).  
-- 🔵 Words reducing toxicity (e.g., “not”, “don’t”).
-- Visuals: bar charts, cumulative plots, and attention heatmaps.
+Applied during evaluation (consistent with training):
 
-### **Negation Sensitivity**
-| Phrase Pair | Toxic | Negated | Δ Change |
-|:--|--:|--:|--:|
-| “You are an idiot” / “You are not an idiot” | 0.92 | 0.34 | −0.58 ✅ |
-| “I hate you” / “I don’t hate you” | 0.95 | 0.48 | −0.47 ✅ |
+```python
+text = re.sub(r"http\S+|www\.\S+", " ", text.lower())
+text = re.sub(r"[^\x00-\x7F]+", " ", text)
+text = re.sub(r"\s+", " ", text).strip()
+```
 
-**Result:** Model handles simple negation but still misinterprets sarcasm or double negatives.
+Tokenization used `AutoTokenizer` with `max_length=256` and `padding="max_length"`.
 
-### **Frequent Error Patterns**
+### **Evaluation Environment**
 
-| Category | Example | Observation |
-|:--|:--|:--|
-| **Sarcasm** | “Nice work, genius.” | Misread as toxic due to literal tone. |
-| **Context Loss** | “That was a kill shot!” | Misclassified as violent. |
-| **Identity Hate Recall** | “Go back to your country.” | Under-detected due to phrasing variety. |
-| **Negation Handling** | “Not bad at all.” | Occasionally flagged toxic. |
+| Component           | Description                      |
+| :------------------ | :------------------------------- |
+| **Hardware**        | Kaggle GPU T4 (x2)               |
+| **Frameworks**      | PyTorch 2.2.0, Transformers 4.41 |
+| **Python Version**  | 3.10                             |
+| **Precision**       | Mixed FP16 inference             |
+| **Reproducibility** | `torch.manual_seed(42)` set      |
 
 ---
 
-## 5. Rewriting Evaluation (Gemini 2.5 + BERTScore)
+## **3. Performance Metrics**
 
-| Metric | Score |
-|:--|--:|
-| Precision | 0.952 |
-| Recall | 0.945 |
-| F1 (Semantic Similarity) | **0.948** |
+| Metric                                | Description                                   |
+| :------------------------------------ | :-------------------------------------------- |
+| **ROC-AUC (macro)**                   | Threshold-independent discrimination ability  |
+| **Precision, Recall, F1 (per label)** | Evaluate class-wise performance               |
+| **Subset Accuracy / Hamming Loss**    | Measure exact match and label-wise error rate |
 
-**Interpretation:**  
-Gemini rewrites preserve meaning while removing toxicity — 60% of test comments were rewritten with high semantic alignment.
-
----
-
-## 6. Limitations
-
-| Area | Limitation |
-|:--|:--|
-| **Dataset Bias** | Rare labels reduce recall accuracy. |
-| **Context Awareness** | Perturbation XAI ignores multi-token context. |
-| **Threshold Tuning** | Static 0.5 may not be optimal across labels. |
-| **XAI Overhead** | O(n) inference calls for perturbation explanations. |
-| **Rewriter Behavior** | Gemini occasionally over-softens tone. |
+**Why chosen:** Multi-label toxicity detection involves class imbalance and overlapping labels. ROC-AUC captures separability, while macro F1 balances precision and recall across rare classes.
 
 ---
 
-## 7. Proposed Improvements
+## **4. Quantitative Results**
 
-- Apply **class-balanced focal loss** for rare labels.  
-- Explore **gradient-based XAI** (Integrated Gradients, LRP).  
-- Adopt **contextual models** (DeBERTa, Longformer).  
-- Refine Gemini prompt with **emotion and tone control**.  
-- Deploy **interactive explainability dashboard**.
+| Label         |   ROC-AUC | F1 (Base=0.5) | F1 (Tuned) | Threshold |
+| :------------ | --------: | ------------: | ---------: | --------: |
+| toxic         |     0.987 |          0.68 |   **0.74** |      0.42 |
+| severe_toxic  |     0.982 |          0.42 |   **0.55** |      0.38 |
+| obscene       |     0.989 |          0.71 |   **0.78** |      0.47 |
+| threat        |     0.984 |          0.54 |   **0.61** |      0.33 |
+| insult        |     0.981 |          0.66 |   **0.72** |      0.46 |
+| identity_hate |     0.976 |          0.59 |   **0.67** |      0.40 |
+| **Macro Avg** | **0.983** |      **0.60** |   **0.68** |         — |
+
+**Summary:**
+
+* Model generalizes well: only 0.006 AUC drop from validation → test.  
+* Threshold tuning improved macro F1 by ~8%.  
+* Performance stable across labels; rare classes improved most.
+
+### **Aggregate Metrics**
+
+| Metric                   | Value |
+| :----------------------- | ----: |
+| **Macro ROC-AUC**        | 0.983 |
+| **Macro F1 (Optimized)** |  0.68 |
+| **Subset Accuracy**      |  0.47 |
+| **Hamming Loss**         | 0.062 |
+
+**Learning Curve:** Validation and training losses converged by epoch 3, indicating minimal overfitting.
 
 ---
 
-## 8. Conclusion
+## **5. Qualitative Results**
 
-The CleanSpeech model shows **robust performance** in toxicity detection and rewriting.  
-Explainability analysis provides transparent token-level reasoning, while Gemini successfully converts harmful expressions into constructive feedback.  
-Future work will target **context understanding**, **scalability**, and **real-time interpretability**.
+### **Example Predictions**
+
+| Input                             | True Labels   | Predicted (Top-3)           |
+| :-------------------------------- | :------------ | :-------------------------- |
+| “You are such an idiot.”          | toxic, insult | toxic (0.91), insult (0.85) |
+| “You are not an idiot.”           | none          | none                        |
+| “Go die already!”                 | threat, toxic | threat (0.89), toxic (0.84) |
+| “That was disgusting.”            | obscene       | obscene (0.80)              |
+| “I completely disagree with you.” | none          | none                        |
+
+### **Explainability Visualization**
+
+* Perturbation-based importance scores highlight key words contributing to toxicity.  
+* 🔴 Red → increases toxicity (“idiot”, “hate”); 🔵 Blue → reduces toxicity (“not”, “don’t”).  
+* Cumulative impact plots show how toxicity builds token by token.
+
+### **Rewriting Examples (Gemini 2.5)**
+
+| Toxic Input                              | Constructive Rewrite                                                         |
+| :--------------------------------------- | :--------------------------------------------------------------------------- |
+| “You are such an idiot and I hate you!”  | “I strongly disagree with your approach and find it frustrating.”            |
+| “This politician is a liar and a thief.” | “I question this politician’s honesty and integrity based on their actions.” |
+| “That guy is a complete moron.”          | “I think that person made poor decisions.”                                   |
+
+**Observation:** Rewrites preserve semantic meaning (BERTScore F1 = 0.948).
 
 ---
 
-> 🧠 **In essence:**  
-> CleanSpeech combines transformer-based toxicity detection, explainable AI, and Gemini-powered rewriting to create an interpretable and constructive communication system ready for deployment.
+## **6. Error Analysis**
+
+### **6.1 Quantitative Trends**
+
+| Issue               | Observation                                                  |
+| :------------------ | :----------------------------------------------------------- |
+| Class Imbalance     | `threat` and `identity_hate` have lower recall (~0.55–0.63). |
+| Ambiguity / Sarcasm | “Nice job, genius.” often misclassified as toxic.            |
+| Context Dependence  | “That was a kill shot!” flagged as violent.                  |
+| Mixed Language      | Words like “pagal” not recognized.                           |
+
+### **6.2 Root Causes**
+
+* Semantic ambiguity (implied toxicity).  
+* Limited multilingual exposure.  
+* Phrase-level context missing from word-based perturbation method.
+
+---
+
+## **7. Limitations**
+
+1. Imbalanced data lowers rare-class recall.  
+2. Token-level XAI lacks phrase-level understanding.  
+3. Static thresholding unsuitable across all labels.  
+4. Perturbation explanations are computationally expensive (O(n)).  
+5. Gemini rewrites can over-soften original tone.
+
+---
+
+## **8. Proposed Improvements / Next Steps**
+
+* Use **class-balanced focal loss** to improve minority labels.  
+* Explore **gradient-based XAI** (Integrated Gradients, LRP).  
+* Test **context-aware models** (DeBERTa, Longformer).  
+* Add **tone-controlled rewrite prompts** for better emotion preservation.  
+* Integrate **interactive visualization dashboard** for real-time explanations.
+
+---
+
+## **9. Artifacts & Reproducibility**
+
+| Artifact             | Description                                |
+| :------------------- | :----------------------------------------- |
+| `evaluation.ipynb`   | Metric computation and plots               |
+| `xai_analysis.ipynb` | Explainability via perturbation & heatmaps |
+| `rewrite_eval.ipynb` | Gemini rewrite + BERTScore evaluation      |
+| `best_model/`        | Fine-tuned weights (`.safetensors`)        |
+| Dataset Split        | 80% train / 20% test                       |
+
+**Reproducibility Command:**
+
+```bash
+python evaluate.py --model_dir best_model --split test
+```
+
+---
+
+## **10. Summary**
+
+**CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
+
+* **Macro ROC-AUC:** 0.983  
+* **Macro F1:** 0.68  
+* **BERTScore (rewriting):** 0.948  
+
+Explainability visualizations confirmed token-level reasoning, while Gemini rewrites effectively converted harmful expressions into constructive feedback.
+
+> In essence, Milestone 5 validated both **model trustworthiness** and **rewrite reliability**, preparing CleanSpeech for deployment and user-facing evaluation in Milestone 6.
