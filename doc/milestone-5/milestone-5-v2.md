@@ -1,13 +1,21 @@
 # 🧩 Milestone 5: Model Evaluation & Analysis
+**CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
 
-**Project:** CleanSpeech – Toxicity Detection & Rewriting with Explainable AI  
-**Date:** November 7  
-**Model:** `bert-base-uncased` (Fine-tuned)  
-**Focus:** Evaluation, Explainability, and Rewriting System Performance
+--
+## **Milestone overview**
 
+**CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
+
+* **Macro ROC-AUC:** 0.983  
+* **Macro F1:** 0.68  
+* **BERTScore (rewriting):** 0.948  
+
+Explainability visualizations confirmed token-level reasoning, while Gemini rewrites effectively converted harmful expressions into constructive feedback.
+
+> In essence, Milestone 5 validated both **model trustworthiness** and **rewrite reliability**, preparing CleanSpeech for deployment and user-facing evaluation in Milestone 6.
 ---
 
-## **1. Overview / Objective**
+## **1. Objective**
 
 Following **Milestone 4**, the fine-tuned `bert-base-uncased` model trained on the **Jigsaw Toxic Comment Classification** dataset was evaluated in this milestone. The goal was to analyze performance on unseen data, interpret model predictions, and test the integrated rewriting pipeline using Gemini 2.5.
 
@@ -189,14 +197,4 @@ python evaluate.py --model_dir best_model --split test
 
 ---
 
-## **10. Summary**
 
-**CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
-
-* **Macro ROC-AUC:** 0.983  
-* **Macro F1:** 0.68  
-* **BERTScore (rewriting):** 0.948  
-
-Explainability visualizations confirmed token-level reasoning, while Gemini rewrites effectively converted harmful expressions into constructive feedback.
-
-> In essence, Milestone 5 validated both **model trustworthiness** and **rewrite reliability**, preparing CleanSpeech for deployment and user-facing evaluation in Milestone 6.
