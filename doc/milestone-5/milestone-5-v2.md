@@ -9,9 +9,9 @@
 * **Macro ROC-AUC:** 0.983  
 * **Macro F1:** 0.60 
 
-====================================================================================================
-OPTIMAL THRESHOLDS FOR EACH CLASS
-====================================================================================================
+
+# OPTIMAL THRESHOLDS FOR EACH CLASS
+
 toxic                | Best Threshold: 0.8 | F1 Score: 0.706480
 severe_toxic         | Best Threshold: 0.5 | F1 Score: 0.375228
 obscene              | Best Threshold: 0.7 | F1 Score: 0.693135
@@ -20,9 +20,7 @@ insult               | Best Threshold: 0.5 | F1 Score: 0.678766
 identity_hate        | Best Threshold: 0.4 | F1 Score: 0.593705
 
 
-====================================================================================================
-CREATING FINAL PREDICTIONS WITH OPTIMAL THRESHOLDS
-====================================================================================================
+# CREATING FINAL PREDICTIONS WITH OPTIMAL THRESHOLDS
 toxic: Using threshold 0.8
 severe_toxic: Using threshold 0.5
 obscene: Using threshold 0.7
@@ -31,9 +29,8 @@ insult: Using threshold 0.5
 identity_hate: Using threshold 0.4
 
 
-====================================================================================================
-FINAL METRICS WITH OPTIMAL THRESHOLDS
-====================================================================================================
+# FINAL METRICS WITH OPTIMAL THRESHOLDS
+
 toxic                | F1 Score: 0.706480
 severe_toxic         | F1 Score: 0.375228
 obscene              | F1 Score: 0.693135
@@ -41,7 +38,7 @@ threat               | F1 Score: 0.566802
 insult               | F1 Score: 0.678766
 identity_hate        | F1 Score: 0.593705
 
-Macro F1 Score        | 0.602353
+# Macro F1 Score     | 0.602353
 
 
 * **BERTScore (rewriting):** 0.948  
