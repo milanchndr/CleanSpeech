@@ -129,6 +129,57 @@ Tokenization used `AutoTokenizer` with `max_length=256` and `padding="max_length
 * ![blue](https://img.shields.io/badge/Reduces%20Toxicity-blue) → words like *“not”*, *“don’t”*  
 * Cumulative impact plots visualize how toxicity probability builds progressively across tokens.
 
+<!doctype html>
+<html>
+<head><meta charset="utf-8" /><title>SHAP Text Explanation</title></head>
+<body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
+  <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
+  <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.986</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.4052</div>
+  
+    <!-- <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
+      <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
+      </div>
+    </div> -->
+    
+  <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000001378932548);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.2788920604093911);">You</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15497692885270387);"> are</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.189523408759821);"> an</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15213593549372117);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.23522983731119324);">absolute</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7499999851938245);"> idiot</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.16587771057154777);"> and</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15026574098634257);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20129744777849087);">a</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.2944799400429505);"> dis</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.27408209408875445);">grace</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20120076943848897);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15);"></span>
+  </div>
+</body>
+</html>
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8" /><title>SHAP Text Explanation</title></head>
+<body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
+  <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
+  <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.000</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.1241</div>
+  
+    <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
+      <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
+      </div>
+    </div>
+    
+  <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000002565066425);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.6723397901783577);">Thanks</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.2725782440169456);"> for</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.346742515877133);"> the</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.5471902722875057);"> clar</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.6437238944841895);">ification</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.37438450812256063);">,</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.17355492501077102);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.7499999516405974);">appreciate</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20577583419241335);"> it</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.3922865757603108);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15);"></span>
+  </div>
+</body>
+</html>
+
+---
+
+![Attention Heatmap](attention_heatmap.png)
+**Figure:** Attention weights visualization shows model focus on toxic keywords.
+
 
 ### **Rewriting Examples (Gemini 2.5)**
 
