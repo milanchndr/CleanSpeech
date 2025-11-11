@@ -7,38 +7,45 @@
 **CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
 
 * **Macro ROC-AUC:** 0.983  
-* **Macro F1:** 0.60 
 
+## 📊 Optimal Thresholds for Each Class
 
-# OPTIMAL THRESHOLDS FOR EACH CLASS
+| Label           | Best Threshold | F1 Score  |
+|-----------------|----------------|-----------|
+| toxic           | **0.8**        | **0.706480** |
+| severe_toxic    | **0.5**        | **0.375228** |
+| obscene         | **0.7**        | **0.693135** |
+| threat          | **0.1**        | **0.566802** |
+| insult          | **0.5**        | **0.678766** |
+| identity_hate   | **0.4**        | **0.593705** |
 
-toxic                | Best Threshold: 0.8 | F1 Score: 0.706480
-severe_toxic         | Best Threshold: 0.5 | F1 Score: 0.375228
-obscene              | Best Threshold: 0.7 | F1 Score: 0.693135
-threat               | Best Threshold: 0.1 | F1 Score: 0.566802
-insult               | Best Threshold: 0.5 | F1 Score: 0.678766
-identity_hate        | Best Threshold: 0.4 | F1 Score: 0.593705
+---
 
+## ⚙️ Thresholds Used for Final Predictions
 
-# CREATING FINAL PREDICTIONS WITH OPTIMAL THRESHOLDS
-toxic: Using threshold 0.8
-severe_toxic: Using threshold 0.5
-obscene: Using threshold 0.7
-threat: Using threshold 0.1
-insult: Using threshold 0.5
-identity_hate: Using threshold 0.4
+- **toxic:** threshold = 0.8  
+- **severe_toxic:** threshold = 0.5  
+- **obscene:** threshold = 0.7  
+- **threat:** threshold = 0.1  
+- **insult:** threshold = 0.5  
+- **identity_hate:** threshold = 0.4  
 
+---
 
-# FINAL METRICS WITH OPTIMAL THRESHOLDS
+## 📈 Final Metrics with Optimal Thresholds
 
-toxic                | F1 Score: 0.706480
-severe_toxic         | F1 Score: 0.375228
-obscene              | F1 Score: 0.693135
-threat               | F1 Score: 0.566802
-insult               | F1 Score: 0.678766
-identity_hate        | F1 Score: 0.593705
+| Label           | F1 Score  |
+|-----------------|-----------|
+| toxic           | **0.706480** |
+| severe_toxic    | **0.375228** |
+| obscene         | **0.693135** |
+| threat          | **0.566802** |
+| insult          | **0.678766** |
+| identity_hate   | **0.593705** |
 
-# Macro F1 Score     | 0.602353
+---
+
+### 🧮 **Macro F1 Score:** `0.602353`
 
 
 * **BERTScore (rewriting):** 0.948  
