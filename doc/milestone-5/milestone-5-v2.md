@@ -22,7 +22,7 @@ Following **Milestone 4**, the fine-tuned `bert-base-uncased` model trained on t
 Key objectives:
 
 * Evaluate model generalization on held-out test data.
-* Perform both **quantitative and qualitative analyses**.
+* Perform both **quantitative and qualitative analysis**.
 * Identify systematic weaknesses through **error and explainability studies**.
 * Validate rewrite quality using **BERTScore**.
 
