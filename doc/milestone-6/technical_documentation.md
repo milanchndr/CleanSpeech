@@ -64,7 +64,7 @@ pip install -r requirements.txt
 ## 2. Data Pipeline
 
 ### 2.1 Dataset Sources
-The project employs Jigsaw Toxic Comment Dataset with 150,000 test and train samples for robust training and generalization.
+The project employs Jigsaw Toxic Comment Dataset with ~160,000 test and train samples for robust training and generalization.
 
 1.  **Primary Dataset (Training & Validation):**
     *   **Source:** [Jigsaw Toxic Comment Classification Challenge](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge)
@@ -247,7 +247,7 @@ The project's components are deployed across several platforms for accessibility
 
 To fully reproduce the results of this project, follow these steps:
 
-*   **✅ Environment:** Set up a Python 3.10 environment and install all packages from the `requirements.txt` file provided in [Section 1](#1-environment-setup).
+*   ** Environment:** Set up a Python 3.10 environment and install all packages from the `requirements.txt` file provided in [Section 1](#1-environment-setup).
 *   **✅ Data:** Download the **Jigsaw** and **HASOC** datasets from their respective sources. Place them in a `data/` directory.
 *   **✅ Random Seed:** The training script `toxic_comment_classification.py` uses a fixed random seed for all libraries (`seed = 42`) to ensure reproducible splits and weight initialization.
 *   **✅ Training Script:** Run the training notebook/script to fine-tune the model.
