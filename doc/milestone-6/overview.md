@@ -39,7 +39,7 @@ CleanSpeech is composed of several interconnected components, each deployed and 
 
 | Component | Technology | Status & Location | Description |
 | :--- | :--- | :--- | :--- |
-| **Frontend UI** | Streamlit | **Runnable Locally** | An interactive, multi-page web application for real-time text analysis and visualization. Run with `streamlit run ui/app.py`. |
+| **Frontend UI** | Streamlit | **Online** | An interactive, multi-page web application for real-time text analysis and visualization. Run with `streamlit run ui/app.py`. |
 | **Backend API** | FastAPI | **Deployed on Hugging Face Spaces** | The core inference engine that exposes the model's capabilities via a REST API endpoint. **Endpoint:** `https://milanchndr-Toxic-Comment-Classifier-Explainer.hf.space/predict` |
 | **Core Classifier Model** | `mDeBERTa-v3-base` | **Deployed on Hugging Face Hub** | The fine-tuned, multi-label toxicity detection model, available for download and use in other applications. **Model ID:** `milanchndr/toxicity-classifier-mdeberta` |
 | **Generative Rewriter** | Google Gemini | **External API** | The text rewriting module, accessed via the Google Generative AI API. Requires a valid API key for operation. |
