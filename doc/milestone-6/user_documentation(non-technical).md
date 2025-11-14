@@ -42,7 +42,7 @@ The CleanSpeech interface will load directly in your browser, and you'll be read
 The main screen is your analysis hub. It’s designed to be simple and intuitive.
 
 1.  **Enter Text:** Copy and paste or type the comment you want to analyze into the text box labeled "**Enter your text**".
-2.  **Click Predict:** Hit the "**Predict**" button to start the analysis.
+2.  **Send to CleanSpeech:** Hit the "**Send**" button to start the analysis.
 
 *   `[SCREENSHOT: The main "Chat" page of the Streamlit UI, showing the text input box with an example comment like "You are an idiot. This is the worst thing ever." and the "Predict" button.]`
 
@@ -75,18 +75,6 @@ If a comment was flagged as toxic, CleanSpeech provides a rewritten version. Thi
 
 ---
 
-### Step 4: Customize the Sensitivity (Optional)
-
-Every community has different standards. You can fine-tune CleanSpeech's sensitivity using the sliders in the left-hand sidebar.
-
-*   **Adjusting Thresholds:** A threshold is the "tipping point" for a comment to be flagged.
-    *   **Lowering the threshold** (e.g., from 0.8 to 0.6) makes the system **more sensitive** and more likely to flag comments.
-    *   **Increasing the threshold** makes the system **less sensitive** and will only flag more severe comments.
-
-You can set a unique threshold for each of the six toxicity categories to match your community's specific guidelines.
-
-*   `[SCREENSHOT: The sidebar of the UI, clearly showing the six toxicity threshold sliders.]`
-
 ## 4. Example Scenarios
 
 #### Scenario 1: A Clear Insult
@@ -110,7 +98,7 @@ You can set a unique threshold for each of the six toxicity categories to match 
 Having trouble? Here are a few common issues and their solutions.
 
 *   **The App Doesn't Load in My Browser:**
-    *   Make sure you ran the `streamlit run ui/app.py` command correctly from the project directory. Check for any error messages in your terminal.
+    *   Make sure you ran the [https://cleanspeech.streamlit.app/](https://cleanspeech.streamlit.app/) command correctly from the project directory. Check for any error messages in your terminal.
 
 *   **The Analysis is Slow:**
     *   The first analysis after launching the app can be slower as the model loads. Subsequent analyses should be faster. Complex, long comments also take more time to process.
