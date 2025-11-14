@@ -3,6 +3,8 @@ data/
 __pycache__/
 *.pyc
 *.pyo
+/ui/.env
+/ui/.venv
 
 # Ignore model weight files only
 src/mdeberta-v3-base/models/

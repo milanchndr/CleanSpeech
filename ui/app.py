@@ -1,120 +1,38 @@
-# ui/app.py
-# --- resilient imports: work both as package and as script ---
-import streamlit as st
-from pathlib import Path
+import streamlit as st 
+from _temp.config import PAGE_CONFIG, MODEL_MAPPER
+st.set_page_config(**PAGE_CONFIG)  
 
+available_models = list(MODEL_MAPPER.keys())
+if "model" not in st.session_state:
+    st.session_state.model = available_models[0]
 
-try:
-    # package mode (preferred)
-    from .paths import get_root, get_models_dir
-    from .config import APP_TITLE, APP_CAPTION, CHART_HEIGHT
-    from . import config
-    from .inference import (
-        discover_models,
-        resolve_meta,
-        load_model,
-        load_meta,
-        predict_proba,
-    )
-    from .components import (
-        render_header,
-        render_model_picker,
-        render_text_input,
-        flash_top_prediction,
-        render_footer,
-    )
-    from .charts import probability_bar_chart
-    from . import explain
+if "current_message" not in st.session_state:
+    st.session_state.current_message = None
+    
+if "api_response" not in st.session_state:
+    st.session_state.api_response = None
 
-except ImportError:  # script mode fallback
-    from paths import get_root, get_models_dir
-    from config import APP_TITLE, APP_CAPTION, CHART_HEIGHT
-    import config
-    from inference import (
-        discover_models,
-        resolve_meta,
-        load_model,
-        load_meta,
-        predict_proba,
-    )
-    from components import (
-        render_header,
-        render_model_picker,
-        render_text_input,
-        flash_top_prediction,
-        render_footer,
-    )
-    from charts import probability_bar_chart
-    import explain
+if "toxicity_threshold" not in st.session_state:
+    st.session_state.toxicity_threshold = 0.5
 
 
 
+explain_page = st.Page("pages/explain.py", title = "Explain", icon = ":material/text_fields_alt:")
+chat_page = st.Page("pages/chat.py", title = "Chat", icon = ":material/robot_2:")
 
-def main() -> None:
-    st.set_page_config(page_title=APP_TITLE, layout="centered")
+pg = st.navigation([
+    chat_page, explain_page
+])
 
-    # Header
-    render_header(APP_TITLE, APP_CAPTION)
+st.sidebar.markdown("### Select Model")  
+selected_model = st.sidebar.selectbox('Model Selection', options=available_models) 
+toxicity_threshold = st.sidebar.slider("Select threshold for toxicity (default = 0.5)", 0.0, 1.0, 0.5, 0.05)
 
-    # Paths
-    root: Path = get_root(__file__)
-    models_dir: Path = get_models_dir(root)
+submit_btn = st.sidebar.button('Submit')
 
-    # Discover available models
-    model_paths = discover_models(models_dir)
-    if not model_paths:
-        st.error(f"No .joblib models found in {models_dir}")
-        st.stop()
+if submit_btn:
+    st.session_state.model = selected_model
+    st.session_state.toxicity_threshold = toxicity_threshold
 
-    # Model picker
-    model_path = render_model_picker(model_paths)
-
-    # Resolve metadata
-    try:
-        meta_path, tried = resolve_meta(model_path, models_dir)
-    except FileNotFoundError as e:
-        st.error(str(e))
-        st.stop()
-
-    # Load model + metadata
-    try:
-        model = load_model(model_path)
-    except Exception as e:
-        st.error(str(e))
-        st.stop()
-
-    try:
-        meta = load_meta(meta_path)
-        labels = list(meta["label_cols"])
-        threshold = float(meta.get("threshold", config.DEFAULT_THRESHOLD))
-    except Exception as e:
-        st.error(str(e))
-        st.stop()
-
-    # Text input + Predict
-    text, do_predict = render_text_input()
-    if do_predict:
-        if not text:
-            st.warning("Please enter some text.")
-        else:
-            probs = predict_proba(model, text)  # shape: (n_labels,)
-            # Flash summary (flagged / no toxicity)
-            _, order = flash_top_prediction(probs, labels, threshold)
-
-            # Probability chart
-            chart = probability_bar_chart(labels, probs, height=CHART_HEIGHT)
-            st.altair_chart(chart, use_container_width=True)
-
-    # Footer
-    render_footer(model_path.name, meta_path.name, threshold)
-
-
-if __name__ == "__main__":
-    # Sidebar navigation
-    choice = st.sidebar.radio("Navigation", ["Predict", "Explain"])
-
-    if choice == "Predict":
-        main()
-    elif choice == "Explain":
-        explain.render()
-
+if __name__ == "__main__" : 
+    pg.run()
