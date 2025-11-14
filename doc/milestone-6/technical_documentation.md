@@ -64,17 +64,13 @@ pip install -r requirements.txt
 ## 2. Data Pipeline
 
 ### 2.1 Dataset Sources
-The project employs a two-tiered dataset strategy for robust training and generalization.
+The project employs Jigsaw Toxic Comment Dataset with 150,000 test and train samples for robust training and generalization.
 
 1.  **Primary Dataset (Training & Validation):**
     *   **Source:** [Jigsaw Toxic Comment Classification Challenge](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge)
     *   **Description:** Contains ~160,000 Wikipedia talk page comments with six binary labels: `toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`.
     *   **Licensing:** Competition-specific license. Please refer to the Kaggle page for terms of use.
 
-2.  **Secondary Dataset (Testing & Generalization):**
-    *   **Source:** [HASOC (Hate Speech and Offensive Content)](http://hasocfire.org/2021/index.html)
-    *   **Description:** A multilingual dataset of social media posts (Twitter, Facebook) containing English, Hindi, and code-mixed "Hinglish."
-    *   **Licensing:** Primarily for research purposes.
 
 ### 2.2 Preprocessing Summary
 The data pipeline is detailed in `Milestone_2.md` and implemented in `toxic_comment_classification.py`.
@@ -85,11 +81,6 @@ The data pipeline is detailed in `Milestone_2.md` and implemented in `toxic_comm
     3.  **Deduplication:** Removing duplicate comments to prevent data leakage.
     4.  **Splitting:** An 80/20 train/validation split, stratified on the `toxic` label to ensure a balanced distribution of toxic examples in both sets.
 
-*   **HASOC Data (for Testing):**
-    1.  **Unification:** Combining data from multiple years (2019-2021) and file formats (`.csv`, `.tsv`, `.xlsx`).
-    2.  **Advanced Cleaning:** Specialized cleaning that preserves semantically relevant tokens like hashtags and usernames.
-    3.  **Label Augmentation:** The original binary labels ('HOF'/'NOT') were insufficient. The **Gemini API was used to programmatically generate the six Jigsaw-compatible toxicity labels** for each HASOC comment, transforming it into a rich, multi-label test set for evaluating domain generalization.
-
 ---
 
 ## 3. Model Architecture
@@ -99,7 +90,7 @@ The core of the system is a fine-tuned transformer model for multi-label text cl
 *   **Base Model:** `microsoft/mdeberta-v3-base`
 *   **Justification:**
     *   **Disentangled Attention:** DeBERTa's key innovation separates content and position encodings, leading to a superior understanding of token relationships and context, which is critical for detecting nuanced toxicity.
-    *   **Multilingual:** Natively supports multiple languages, making it ideal for handling the code-mixed data from the HASOC test set.
+    *   **Multilingual:** Natively supports multiple languages, making it ideal for handling multilingual toxic classification.
     *   **Proven Performance:** Achieves state-of-the-art results on numerous NLP benchmarks.
 
 
