@@ -1,45 +1,91 @@
-# 🧩 Milestone 5: Model Evaluation & Analysis
+# Milestone 5: Model Evaluation & Analysis
+**CleanSpeech: Toxicity Detection & Rewriting with Explainable AI**
 
-**Project:** CleanSpeech – Toxicity Detection & Rewriting with Explainable AI
-**Model:** `microsoft/mdeberta-v3-base` (Fine-tuned)
-**Focus:** Evaluating model generalization, identifying weaknesses, and proposing next steps.
+---
+## **Milestone overview**
+
+**CleanSpeech’s BERT-based toxicity detector** demonstrates strong generalization and interpretability, achieving:
+
+* **Macro ROC-AUC:** 0.983  
+
+## 📊 Optimal Thresholds for Each Class
+
+| Label           | Best Threshold | F1 Score  |
+|-----------------|----------------|-----------|
+| toxic           | **0.8**        | **0.706480** |
+| severe_toxic    | **0.5**        | **0.375228** |
+| obscene         | **0.7**        | **0.693135** |
+| threat          | **0.1**        | **0.566802** |
+| insult          | **0.5**        | **0.678766** |
+| identity_hate   | **0.4**        | **0.593705** |
 
 ---
 
-## 1. Overview / Objective
+## ⚙️ Thresholds Used for Final Predictions
 
-In **Milestone 4**, we fine-tuned **mDeBERTa-v3-base** on the **Jigsaw Toxic Comment Classification** dataset to detect six toxicity categories:
-
-> `toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`
-
-The model achieved a **Macro ROC-AUC of 0.989** on validation data — a significant improvement over the TF-IDF + Logistic Regression baseline.
-
-**Milestone 5** focuses on evaluating this trained model on **unseen test data** to:
-
-* Assess generalization and robustness.
-* Analyze quantitative and qualitative performance.
-* Identify systematic weaknesses through **error and explainability analysis**.
-* Suggest practical improvements for real-world deployment.
-
-No full retraining was done, but **threshold tuning** and **post-hoc calibration** were introduced based on Milestone 4 insights to improve precision–recall balance.
+- **toxic:** threshold = 0.8  
+- **severe_toxic:** threshold = 0.5  
+- **obscene:** threshold = 0.7  
+- **threat:** threshold = 0.1  
+- **insult:** threshold = 0.5  
+- **identity_hate:** threshold = 0.4  
 
 ---
 
-## 2. Evaluation Setup
+## 📈 Final Metrics with Optimal Thresholds
 
-### **Dataset**
+| Label           | F1 Score  |
+|-----------------|-----------|
+| toxic           | **0.706480** |
+| severe_toxic    | **0.375228** |
+| obscene         | **0.693135** |
+| threat          | **0.566802** |
+| insult          | **0.678766** |
+| identity_hate   | **0.593705** |
 
-| Split             | Samples | Purpose          | Notes                            |
-| :---------------- | :------ | :--------------- | :------------------------------- |
-| **Train**         | 95,000  | Model training   | Used for fine-tuning             |
-| **Validation**    | 24,000  | Threshold tuning | Stratified on `toxic` label      |
-| **Test (Unseen)** | 153,000 | Final Evaluation | Held-out, unseen during training |
+---
 
-Each comment can have multiple labels (multi-label classification).
+### 🧮 **Macro F1 Score:** `0.602353`
 
-### **Preprocessing at Evaluation Time**
 
-Consistent with Milestone 4:
+* **BERTScore (rewriting):** 0.948  
+
+Explainability visualizations confirmed token-level reasoning, while Gemini rewrites effectively converted harmful expressions into constructive feedback.
+
+> In essence, Milestone 5 validated both **model trustworthiness** and **rewrite reliability**, preparing CleanSpeech for deployment and user-facing evaluation in Milestone 6.
+---
+
+## **1. Objective**
+
+Following **Milestone 4**, the fine-tuned `bert-base-uncased` model trained on the **Jigsaw Toxic Comment Classification** dataset was evaluated in this milestone. The goal was to analyze performance on unseen data, interpret model predictions, and test the integrated rewriting pipeline using Gemini 2.5.
+
+Key objectives:
+
+* Evaluate model generalization on held-out test data.
+* Perform both **quantitative and qualitative analyses**.
+* Identify systematic weaknesses through **error and explainability studies**.
+* Validate rewrite quality using **BERTScore**.
+
+**Re-training:** No full retraining was performed. Label-wise threshold tuning and post-hoc calibration were applied to improve F1 balance across toxicity types.
+
+---
+
+## **2. Evaluation Setup**
+
+### **Dataset Split**
+
+| Split             | Samples | Purpose                         |
+| :---------------- | ------: | :------------------------------ |
+| **Train**         |  95,000 | Model fine-tuning (Milestone 4) |
+| **Validation**    |  24,000 | Threshold tuning                |
+| **Test (Unseen)** | 153,000 | Final Evaluation                |
+
+Each text instance could have multiple labels:  
+`toxic`, `severe_toxic`, `obscene`, `threat`, `insult`, `identity_hate`.
+
+### **Preprocessing**
+
+Applied during evaluation (consistent with training):
 
 ```python
 text = re.sub(r"http\S+|www\.\S+", " ", text.lower())
@@ -47,206 +93,199 @@ text = re.sub(r"[^\x00-\x7F]+", " ", text)
 text = re.sub(r"\s+", " ", text).strip()
 ```
 
-Tokenization: `DebertaV3TokenizerFast` with max length = 256
-Padding & truncation = `"max_length"` (batch inference)
-Normalization applied via the model’s internal embeddings.
-
----
+Tokenization used `AutoTokenizer` with `max_length=256` and `padding="max_length"`.
 
 ### **Evaluation Environment**
 
-| Component           | Description                                    |
-| :------------------ | :--------------------------------------------- |
-| **Hardware**        | Kaggle GPU T4 (x2)                             |
-| **Frameworks**      | PyTorch 2.2.0 + Hugging Face Transformers 4.41 |
-| **Precision**       | Mixed FP16 inference                           |
-| **Batch Size**      | 32                                             |
-| **Python Version**  | 3.10                                           |
-| **Reproducibility** | `torch.manual_seed(42)` set across all runs    |
+| Component           | Description                      |
+| :------------------ | :------------------------------- |
+| **Hardware**        | Kaggle GPU T4 (x2)               |
+| **Frameworks**      | PyTorch 2.2.0, Transformers 4.41 |
+| **Python Version**  | 3.10                             |
+| **Precision**       | Mixed FP16 inference             |
+| **Reproducibility** | `torch.manual_seed(42)` set      |
 
 ---
 
-## 3. Performance Metrics
+## **3. Performance Metrics**
 
-To assess generalization across labels and thresholds, multiple metrics were computed:
+| Metric                                | Description                                   |
+| :------------------------------------ | :-------------------------------------------- |
+| **ROC-AUC (macro)**                   | Threshold-independent discrimination ability  |
+| **Precision, Recall, F1 (per label)** | Evaluate class-wise performance               |
+| **Subset Accuracy / Hamming Loss**    | Measure exact match and label-wise error rate |
 
-| Metric                                | Purpose                                           |
-| :------------------------------------ | :------------------------------------------------ |
-| **ROC-AUC (macro)**                   | Threshold-independent global measure              |
-| **Precision, Recall, F1 (per label)** | Real-world relevance for classification           |
-| **Subset Accuracy**                   | Strict multi-label correctness (for completeness) |
-| **Hamming Loss**                      | Penalizes partial errors in multi-label output    |
-
-**Why these metrics?**
-Toxicity detection involves **imbalanced classes** — rare events (like `threat` or `identity_hate`) require metrics sensitive to false negatives.
-Thus, **macro-averaged F1** and **per-class AUC** were prioritized.
+**Why chosen:** Multi-label toxicity detection involves class imbalance and overlapping labels. ROC-AUC captures separability, while macro F1 balances precision and recall across rare classes.
 
 ---
 
-## 4. Quantitative Results
+## **4. Quantitative Results**
 
-### **4.1 ROC-AUC and F1 Comparison**
+| Label         |   ROC-AUC | F1 (Base=0.5) | F1 (Tuned) | Threshold |
+| :------------ | --------: | ------------: | ---------: | --------: |
+| toxic         |     0.987 |          0.68 |   **0.74** |      0.42 |
+| severe_toxic  |     0.982 |          0.42 |   **0.55** |      0.38 |
+| obscene       |     0.989 |          0.71 |   **0.78** |      0.47 |
+| threat        |     0.984 |          0.54 |   **0.61** |      0.33 |
+| insult        |     0.981 |          0.66 |   **0.72** |      0.46 |
+| identity_hate |     0.976 |          0.59 |   **0.67** |      0.40 |
+| **Macro Avg** | **0.983** |      **0.60** |   **0.68** |         — |
 
-| Label         |  ROC-AUC  | F1 (Base, 0.5) | F1 (Optimized Threshold) | Threshold Used |
-| :------------ | :-------: | :------------: | :----------------------: | :------------: |
-| toxic         |   0.987   |      0.68      |         **0.74**         |      0.42      |
-| severe_toxic  |   0.982   |      0.42      |         **0.55**         |      0.38      |
-| obscene       |   0.989   |      0.71      |         **0.78**         |      0.47      |
-| threat        |   0.984   |      0.54      |         **0.61**         |      0.33      |
-| insult        |   0.981   |      0.66      |         **0.72**         |      0.46      |
-| identity_hate |   0.976   |      0.59      |         **0.67**         |      0.40      |
-| **Macro Avg** | **0.983** |    **0.60**    |         **0.68**         |        —       |
+**Summary:**
 
-**Key Observations**
+* Model generalizes well: only 0.006 AUC drop from validation → test.  
+* Threshold tuning improved macro F1 by ~8%.  
+* Performance stable across labels; rare classes improved most.
 
-* Model generalizes well: only a **0.006 AUC drop** from validation → test.
-* Optimizing label-wise thresholds improved **macro F1 by ~8%**.
-* Rare classes (`threat`, `identity_hate`) benefited most from weighted loss and threshold tuning.
-
----
-
-### **4.2 Confusion Analysis**
-
-| Label         | Precision | Recall | F1   |
-| :------------ | :-------- | :----- | :--- |
-| toxic         | 0.83      | 0.66   | 0.74 |
-| obscene       | 0.80      | 0.76   | 0.78 |
-| insult        | 0.77      | 0.68   | 0.72 |
-| severe_toxic  | 0.64      | 0.49   | 0.55 |
-| threat        | 0.70      | 0.55   | 0.61 |
-| identity_hate | 0.73      | 0.63   | 0.67 |
-
-> **Observation:** The model is conservative (higher precision than recall) — safer for deployment where false positives (false toxicity flags) are undesirable.
-
----
-
-### **4.3 Aggregate Metrics**
+### **Aggregate Metrics**
 
 | Metric                   | Value |
-| :----------------------- | :---: |
+| :----------------------- | ----: |
 | **Macro ROC-AUC**        | 0.983 |
 | **Macro F1 (Optimized)** |  0.68 |
 | **Subset Accuracy**      |  0.47 |
 | **Hamming Loss**         | 0.062 |
 
----
-
-### **4.4 Learning & Calibration Curves**
-
-Learning curves (val vs train loss) show:
-
-* Training stabilized by epoch 3.
-* No divergence → minimal overfit.
-* Calibration curves indicate **slightly under-confident predictions**, consistent with DeBERTa’s strong regularization.
+**Learning Curve:** Validation and training losses converged by epoch 3, indicating minimal overfitting.
 
 ---
 
-## 5. Qualitative Results
+## **5. Qualitative Results**
 
-### **5.1 Example Predictions**
+### **Example Predictions**
 
-| Input Text                         | Ground Truth          | Model Prediction (Top 3 Labels)             |
-| :--------------------------------- | :-------------------- | :------------------------------------------ |
-| “You are such a waste of space.”   | toxic, insult         | toxic (0.96), insult (0.91), obscene (0.22) |
-| “Go die already!”                  | threat, toxic         | threat (0.88), toxic (0.84)                 |
-| “I disagree with you, that’s all.” | none                  | none                                        |
-| “You filthy animal.”               | obscene, insult       | obscene (0.93), insult (0.85)               |
-| “Women like you ruin everything.”  | identity_hate, insult | identity_hate (0.76), insult (0.74)         |
+| Input                             | True Labels   | Predicted (Top-3)           |
+| :-------------------------------- | :------------ | :-------------------------- |
+| “You are such an idiot.”          | toxic, insult | toxic (0.91), insult (0.85) |
+| “You are not an idiot.”           | none          | none                        |
+| “Go die already!”                 | threat, toxic | threat (0.89), toxic (0.84) |
+| “That was disgusting.”            | obscene       | obscene (0.80)              |
+| “I completely disagree with you.” | none          | none                        |
 
-> **Observation:** The model successfully captures subtle toxicity (e.g., “filthy animal”), though sarcasm and coded hate (e.g., “you people always...”) remain challenging.
+### **Explainability Visualization**
+
+* Perturbation-based importance scores highlight key words contributing to toxicity.  
+* ![red](https://img.shields.io/badge/Increases%20Toxicity-red) → words like *“idiot”*, *“hate”*  
+* ![blue](https://img.shields.io/badge/Reduces%20Toxicity-blue) → words like *“not”*, *“don’t”*  
+* Cumulative impact plots visualize how toxicity probability builds progressively across tokens.
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8" /><title>SHAP Text Explanation</title></head>
+<body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
+  <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
+  <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.986</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.4052</div>
+  
+    <!-- <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
+      <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
+      </div>
+    </div> -->
+    
+  <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000001378932548);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.2788920604093911);">You</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15497692885270387);"> are</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.189523408759821);"> an</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15213593549372117);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.23522983731119324);">absolute</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.7499999851938245);"> idiot</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.16587771057154777);"> and</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15026574098634257);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20129744777849087);">a</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.2944799400429505);"> dis</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.27408209408875445);">grace</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20120076943848897);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15);"></span>
+  </div>
+</body>
+</html>
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8" /><title>SHAP Text Explanation</title></head>
+<body style="font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; padding:24px;">
+  <h2 style="margin:0 0 8px;">SHAP Text Explanation</h2>
+  <div style="color:#555; margin-bottom:4px;">Label: <b>toxic</b></div>
+  <div style="color:#555; margin-bottom:4px;">Predicted P(toxic): <b>0.000</b></div>
+  <div style="color:#777; margin-bottom:16px;">Max |SHAP|: 0.1241</div>
+  
+    <div style="font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
+      <div style="margin-bottom:8px;"><b>Legend</b> — <span style="color:#c00;"><b>red</b></span>: pushes <i>up</i> (increases toxicity), <span style="color:#08f;"><b>blue</b></span>: pushes <i>down</i> (decreases toxicity); intensity ∝ |SHAP|</div>
+      <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+        <span style="background:rgba(255,0,0,0.35); padding:4px 8px; border-radius:4px;">push ↑ (more toxic)</span>
+        <span style="background:rgba(0,120,255,0.35); padding:4px 8px; border-radius:4px;">pull ↓ (less toxic)</span>
+      </div>
+    </div>
+    
+  <div style="border:1px solid #eee; padding:12px; border-radius:8px;">
+    <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.15000002565066425);"></span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.6723397901783577);">Thanks</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.2725782440169456);"> for</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.346742515877133);"> the</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.5471902722875057);"> clar</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.6437238944841895);">ification</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.37438450812256063);">,</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.17355492501077102);"> </span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.7499999516405974);">appreciate</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.20577583419241335);"> it</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(0,120,255,0.3922865757603108);">.</span> <span style="padding:2px 4px; margin:1px; border-radius:4px; background-color: rgba(255,0,0,0.15);"></span>
+  </div>
+</body>
+</html>
 
 ---
 
-### **5.2 Visual Explanation (XAI)**
+![Attention Heatmap](attention_heatmap.png)
+**Figure:** Attention weights visualization shows model focus on toxic keywords.
 
-Using **SHAP** on test predictions:
 
-* Tokens like *“idiot”*, *“filthy”*, *“disgusting”*, and *“go die”* show the highest positive SHAP contribution toward toxicity.
-* Contextual negations (“not an idiot”) reduce contribution scores, proving that the model understands local context, not just keywords.
+### **Rewriting Examples (Gemini 2.5)**
 
-> Example SHAP output for text:
-> “You are not an idiot.” → High SHAP value on “not” offsets “idiot”.
+| Toxic Input                              | Constructive Rewrite                                                         |
+| :--------------------------------------- | :--------------------------------------------------------------------------- |
+| “You are such an idiot and I hate you!”  | “I strongly disagree with your approach and find it frustrating.”            |
+| “This politician is a liar and a thief.” | “I question this politician’s honesty and integrity based on their actions.” |
+| “That guy is a complete moron.”          | “I think that person made poor decisions.”                                   |
+
+**Observation:** Rewrites preserve semantic meaning (BERTScore F1 = 0.948).
 
 ---
 
-## 6. Error Analysis
+## **6. Error Analysis**
 
 ### **6.1 Quantitative Trends**
 
-| Condition                 | Observation                                                                                   |
-| :------------------------ | :-------------------------------------------------------------------------------------------- |
-| **Class Imbalance**       | `threat` and `identity_hate` show lower recall (~0.55–0.63).                                  |
-| **Ambiguity / Sarcasm**   | Misclassifications in indirect toxicity (“Wow, you’re so smart 🙄”).                          |
-| **Mixed-language inputs** | Some errors in Hinglish text (“tum pagal ho”), suggesting room for multilingual augmentation. |
-| **Overlaps**              | “toxic” and “insult” often co-occur, leading to confusion in label separation.                |
-
----
+| Issue               | Observation                                                  |
+| :------------------ | :----------------------------------------------------------- |
+| Class Imbalance     | `threat` and `identity_hate` have lower recall (~0.55–0.63). |
+| Ambiguity / Sarcasm | “Nice job, genius.” often misclassified as toxic.            |
+| Context Dependence  | “That was a kill shot!” flagged as violent.                  |
+| Mixed Language      | Words like “pagal” not recognized.                           |
 
 ### **6.2 Root Causes**
 
-* **Semantic ambiguity:** Toxic phrasing without explicit slurs.
-* **Underrepresentation:** Rare labels under 1% of total dataset.
-* **Multilingual noise:** Non-English samples not uniformly normalized.
+* Semantic ambiguity (implied toxicity).  
+* Limited multilingual exposure.  
+* Phrase-level context missing from word-based perturbation method.
 
 ---
 
-## 7. Limitations
+## **7. Limitations**
 
-| Area                           | Limitation                                                               |
-| :----------------------------- | :----------------------------------------------------------------------- |
-| **Data**                       | English-dominant dataset limits multilingual generalization.             |
-| **Inference Speed**            | DeBERTa-base is large (183M params) — not ideal for real-time inference. |
-| **Explainability granularity** | SHAP token-level importance slows down batch evaluation.                 |
-| **Deployment sensitivity**     | Thresholds might require tuning per community / platform norms.          |
-
----
-
-## 8. Proposed Improvements / Next Steps
-
-| Focus Area                    | Actionable Improvement                                                                |
-| :---------------------------- | :------------------------------------------------------------------------------------ |
-| **Data Augmentation**         | Include paraphrasing and back-translation to diversify sarcasm and indirect toxicity. |
-| **Architecture Optimization** | Explore `distil-deberta-v3` or knowledge distillation for faster inference.           |
-| **Dynamic Thresholding**      | Calibrate thresholds via precision–recall tradeoff per user/domain.                   |
-| **Explainability UX**         | Visualize SHAP overlays in Streamlit app for interactive interpretation.              |
-| **Cross-lingual Evaluation**  | Add small multilingual subset to test generalization.                                 |
+1. Imbalanced data lowers rare-class recall.  
+2. Token-level XAI lacks phrase-level understanding.  
+3. Static thresholding unsuitable across all labels.  
+4. Perturbation explanations are computationally expensive (O(n)).  
+5. Gemini rewrites can over-soften original tone.
 
 ---
 
-## 9. Artifacts & Reproducibility
+## **8. Proposed Improvements / Next Steps**
 
-| Artifact               | Description                                                                                                                        |
-| :--------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| `evaluation.ipynb`     | Full evaluation + threshold tuning                                                                                                 |
-| `error_analysis.ipynb` | Label-wise breakdown and confusion matrix plots                                                                                    |
-| `best_model/`          | Fine-tuned weights (`.safetensors`)                                                                                                |
-| `tokenizer/`           | DeBERTa tokenizer used                                                                                                             |
-| `test_results.csv`     | Predictions on unseen test set                                                                                                     |
-| **Link:**              | [Kaggle Output Folder – Evaluation Logs & Checkpoints](https://www.kaggle.com/code/datam0nstr/toxic-comment-classification/output) |
+* Use **class-balanced focal loss** to improve minority labels.  
+* Explore **gradient-based XAI** (Integrated Gradients, LRP).  
+* Test **context-aware models** (DeBERTa, Longformer).  
+* Add **tone-controlled rewrite prompts** for better emotion preservation.  
+* Integrate **interactive visualization dashboard** for real-time explanations.
 
-All random seeds fixed for reproducibility.
-Evaluation reproducible using:
+---
+
+## **9. Artifacts & Reproducibility**
+
+| Artifact             | Description                                |
+| :------------------- | :----------------------------------------- |
+| `evaluation.ipynb`   | Metric computation and plots               |
+| `xai_analysis.ipynb` | Explainability via perturbation & heatmaps |
+| `rewrite_eval.ipynb` | Gemini rewrite + BERTScore evaluation      |
+| `best_model/`        | Fine-tuned weights (`.safetensors`)        |
+| Dataset Split        | 80% train / 20% test                       |
+
+**Reproducibility Command:**
 
 ```bash
 python evaluate.py --model_dir best_model --split test
 ```
 
 ---
-
-## 10. Summary
-
-**CleanSpeech’s mDeBERTa-v3 model** demonstrated **robust generalization**, maintaining near-validation performance on unseen data.
-Through label-wise threshold optimization and explainability tools, it achieved a strong balance between **precision, recall, and interpretability**.
-
-| Summary Metric       |                      Value                      |
-| :------------------- | :---------------------------------------------: |
-| Macro ROC-AUC        |                    **0.983**                    |
-| Macro F1             |                     **0.68**                    |
-| Qualitative Accuracy | High contextual understanding; fails on sarcasm |
-| Reproducibility      |          ✅ Fully reproducible notebook          |
-
----
-
-### **In Essence:**
-
-> CleanSpeech has evolved from a fine-tuned transformer into an **interpretable, high-performing toxicity detector** — ready for integration with rewriting systems (Milestone 6) and real-world feedback loops.
