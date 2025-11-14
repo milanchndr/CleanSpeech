@@ -106,7 +106,9 @@ The entire process can be reproduced using the scripts provided in the project.
 
 For questions, bug reports, or contributions, please use the following channels:
  
-*   **Team Contact :** **Milan Chandra:** [github.com/milanchndr](https://github.com/milanchndr), **Alauddin Ansari:** [github.com/git4alauddin](https://github.com/git4alauddin),**Soumyadip Ghorai:**[github.com/sghoraiIITM](https://github.com/sghoraiIITM)    *   
-    *   
-    *   **Suman Ghorai:** 
+*   **Team Contact :**
+      * **Milan Chandra:** [github.com/milanchndr](https://github.com/milanchndr),
+      * **Alauddin Ansari:** [github.com/git4alauddin](https://github.com/git4alauddin),
+      * **Soumyadip Ghorai:**[github.com/sghoraiIITM](https://github.com/sghoraiIITM)   
+
 *   **Bug Reports & Feature Requests:** Please open an issue on the official GitHub repository (if applicable).
