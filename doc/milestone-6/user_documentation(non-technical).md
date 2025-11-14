@@ -44,7 +44,7 @@ The main screen is your analysis hub. It’s designed to be simple and intuitive
 1.  **Enter Text:** Copy and paste or type the comment you want to analyze into the text box labeled "**Enter your text**".
 2.  **Send to CleanSpeech:** Hit the "**Send**" button to start the analysis.
 
-*   `[SCREENSHOT: The main "Chat" page of the Streamlit UI, showing the text input box with an example comment like "You are an idiot. This is the worst thing ever." and the "Predict" button.]`
+*   ![demo-screenshot](demo1.png)
 
 ---
 
@@ -71,7 +71,8 @@ This is where CleanSpeech shines. It highlights the specific words that contribu
 
 If a comment was flagged as toxic, CleanSpeech provides a rewritten version. This version keeps the original user's core opinion but phrases it in a respectful and constructive way. This is a powerful tool for providing feedback to users.
 
-*   `[SCREENSHOT: A complete analysis result. It should show the "Flagged as toxic" banner, the probability bars, the color-coded text explanation, and the "Constructive Rewrite" section.]`
+*   ![demo-screenshot](demo2.png)
+*   ![demo-screenshot](demo3.png)
 
 ---
 
@@ -98,13 +99,10 @@ If a comment was flagged as toxic, CleanSpeech provides a rewritten version. Thi
 Having trouble? Here are a few common issues and their solutions.
 
 *   **The App Doesn't Load in My Browser:**
-    *   Make sure you ran the [https://cleanspeech.streamlit.app/](https://cleanspeech.streamlit.app/) command correctly from the project directory. Check for any error messages in your terminal.
+    *   Make sure you opended this url [https://cleanspeech.streamlit.app/](https://cleanspeech.streamlit.app/) and you have stable internet connection.
 
 *   **The Analysis is Slow:**
     *   The first analysis after launching the app can be slower as the model loads. Subsequent analyses should be faster. Complex, long comments also take more time to process.
 
-*   **A Comment Was Flagged That I Think is Fine (False Positive):**
-    *   This is a great time to use the threshold sliders! Try increasing the threshold for the specific category that was flagged (e.g., increase the `insult` threshold). This makes the system less sensitive to borderline comments.
-
 *   **I See an Error Message:**
-    *   The simplest first step is to refresh your browser page. If that doesn't work, try stopping the app in your terminal (press `Ctrl + C`) and running the launch command again.
+    *   The simplest first step is to refresh your browser page.
