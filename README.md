@@ -35,8 +35,8 @@
 | 1. Problem Definition & Literature Review | Defined objectives and reviewed existing toxicity detection methods. | ![Done](https://img.shields.io/badge/-Completed-green) |
 | 2. Data Preparation & Preprocessing | Cleaned dataset, handled duplicates, created `clean_text`, and generated train/val/test splits. | ![Done](https://img.shields.io/badge/-Completed-green) |
 | 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | ![Done](https://img.shields.io/badge/-Completed-green) |
-| 4. Model Training & Evaluation | To be performed after architecture finalization. | ![In Progress](https://img.shields.io/badge/-In%20Progress-yellow) |
-| 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | ![Planned](https://img.shields.io/badge/-Planned-lightgrey) |
+| 4. Model Training & Evaluation | To be performed after architecture finalization. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | ![Done](https://img.shields.io/badge/-Completed-green) |
 
 ---
 
