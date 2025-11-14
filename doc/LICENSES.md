@@ -85,31 +85,3 @@ This dataset was the primary corpus for training and validating the toxicity det
     }
     ```
 
-### 3.2 HASOC (Hate Speech and Offensive Content)
-
-This dataset was used for testing the model's generalization capabilities on code-mixed and social media text.
-
-*   **Dataset:** Hate Speech and Offensive Content Identification (HASOC)
-*   **License:** The data is released for research purposes. Use is subject to the terms specified by the annual shared task organizers. Please refer to the official website for specific terms.
-*   **Source:** [HASOC FIRE Website](http://hasocfire.github.io/hasoc/2021/index.html)
-*   **Citation:** Please cite the relevant overview paper for the HASOC track year used (e.g., HASOC 2019, 2020, 2021).
-
-### 3.3 HateXplain
-
-This dataset was referenced for its methodology and potential use in validating the explainability component.
-
-*   **Dataset:** HateXplain
-*   **License:** MIT License
-*   **Source:** [HateXplain GitHub Repository](https://github.com/hate-alert/HateXplain)
-*   **Citation:**
-    ```bibtex
-    @inproceedings{mathew2021hatexplain,
-      title={HateXplain: A benchmark dataset for explainable hate speech detection},
-      author={Mathew, Binny and Saha, Punyajoy and Yimam, Seid Muhie and Biemann, Chris and Goyal, Pawan and Mukherjee, Animesh},
-      booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-      volume={35},
-      number={17},
-      pages={14871--14879},
-      year={2021}
-    }
-    ```
