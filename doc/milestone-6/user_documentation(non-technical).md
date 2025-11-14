@@ -79,21 +79,24 @@ If a comment was flagged as toxic, CleanSpeech provides a rewritten version. Thi
 ## 4. Example Scenarios
 
 #### Scenario 1: A Clear Insult
-
 *   **Input:** `"You are a moron for saying that."`
+     ![demo-screenshot](demo4.png)
 *   **Expected Output:**
     *   High probability for `insult` and `toxic`.
     *   The words `"moron"` will be highlighted in <span style="background-color:#ffcccb; padding:2px; border-radius:3px;">red</span>.
-    *   **Rewrite:** `"I completely disagree with that statement and find it unconvincing."`
+    *   **Rewrite:** `"I found that statement to be misguided."`
+  ![demo-screenshot](demo5.png)
 
+     
 #### Scenario 2: A Non-Toxic Disagreement
 
 *   **Input:** `"I don't agree with your analysis, but I appreciate the detailed post."`
+  ![demo-screenshot](demo6.png)   
 *   **Expected Output:**
     *   Low probabilities across all categories.
-    *   The comment will be flagged as **non-toxic**.
-    *   No rewrite will be provided.
-
+    *   The comment will be flagged as **safe**.
+    *   No changes in the original comment.
+ ![demo-screenshot](demo7.png)   
 ## 5. Troubleshooting
 
 Having trouble? Here are a few common issues and their solutions.
