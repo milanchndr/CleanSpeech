@@ -41,11 +41,7 @@
 ---
 
 ## Streamlit Interface
-The **CleanSpeech UI** enables users to:
-- Enter free-form text.
-- View toxicity predictions with probability bars.
-- Inspect model explanations (SHAP/LIME visualization).
-- Generate **non-toxic rewrites** using the Gemini API.
+<the ui guidance>
 
 ---
 
@@ -130,15 +126,6 @@ CleanSpeech
 │
 └── ui                       ← Streamlit-based interface for prediction & explainability  
     │   app.py  
-    │   charts.py  
-    │   components.py  
-    │   config.py  
-    │   explain.py  
-    │   inference.py  
-    │   paths.py  
-    │   requirements.txt  
-    │   __init__.py  
-    │
             
 ```
 ---
@@ -150,12 +137,8 @@ cd ui
 pip install -r requirements.txt
 streamlit run app.py
 ```
-
----
-
-## Ongoing Steps:
-- Finalize model architecture and begin training.
-- Develop and integrate the Streamlit UI for user interaction.  
+_Visit online:_ 
+<deployed url>
 
 ---
 
