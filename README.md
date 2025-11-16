@@ -41,7 +41,11 @@
 ---
 
 ## Streamlit Interface
-<the ui guidance>
+chat interface for toxicity detection and rewriting:
+![Chat Interface Screenshot](doc/milestone-6/demo2.png)
+
+explainability page with SHAP visualizations:
+![Explainability Screenshot](doc/milestone-6/demo5.png)
 
 ---
 
