@@ -53,8 +53,9 @@
 >Real-time toxicity detection and safe rewrites.
 ![Chat Interface](doc/milestone-6/demo2.png)
 
+
 ### Explainability Page  
-Token-level SHAP attributions and model insights.
+>Token-level SHAP attributions and model insights.
 ![Explainability Page](doc/milestone-6/demo5.png)
 
 ---
