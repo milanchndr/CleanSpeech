@@ -42,8 +42,9 @@
 ---
 
 ## Architecture Overview
-CleanSpeech integrates Streamlit UI, mDeBERTa toxicity detection, SHAP explainability, and LLM-based rewriting in a modular pipeline. See milestone docs for details.
+>CleanSpeech integrates Streamlit UI, mDeBERTa toxicity detection, SHAP explainability, and LLM-based rewriting in a modular pipeline. See milestone docs for details.
 ![Architecture Diagram](doc/milestone-3/diagram.png)
+
 ---
 
 ## Streamlit Interface
