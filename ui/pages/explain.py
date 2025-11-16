@@ -6,6 +6,10 @@ import plotly.graph_objects as go
 import plotly.express as px
 from utils.api_base import get_response
 
+def score_to_color(score, min_score, max_score): 
+    norm = (score - min_score) / (max_score - min_score)
+    return norm
+
 
 st.title("CleanSpeech — Model Explanations")
 st.write("Understand how our hate speech detection model makes predictions")
@@ -39,7 +43,7 @@ def explain_prediction(user_text: str = ""):
     st.plotly_chart(px.bar(probs, x="Label", y="Probability", title="Toxicity Probabilities"), use_container_width=True)
 
     # Compute final labels dynamically
-    final_labels = {k: int(v >= st.session_state.toxicity_threshold) for k, v in data["probabilities"].items()}
+    final_labels = {k: int(v >= st.session_state.toxicity_threshold[k]) for k, v in data["probabilities"].items()}
 
     # ----------------------------------------------------
     # 3️⃣ FINAL LABELS
