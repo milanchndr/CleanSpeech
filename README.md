@@ -144,12 +144,40 @@ CleanSpeech
 ---
 
 ## Getting Started
-_Run locally:_
-```bash
-cd ui
-pip install -r requirements.txt
-streamlit run app.py
+
+Run the Streamlit app locally or access the hosted demo.
+
+Local (Windows PowerShell)
+```powershell
+# from project root
+cd d:\User\vscode\CleanSpeech
+
+# create & activate virtual environment
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+# install UI dependencies
+pip install -r ui/requirements.txt
+
+# run the app
+streamlit run ui/app.py
 ```
+
+Or using Command Prompt (cmd.exe)
+```cmd
+cd d:\User\vscode\CleanSpeech
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r ui/requirements.txt
+streamlit run ui/app.py
+```
+
+Hosted demo
+- Live app: https://cleanspeech.streamlit.app/
+
+Notes
+- Default local URL: http://localhost:8501
+- Requires Python 3.8+ and Streamlit installed via the ui/requirements.txt
 
 ---
 
