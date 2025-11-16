@@ -69,7 +69,7 @@ CleanSpeech
 │
 ├── doc                               ← Full documentation across all milestones  
 │   │   LICENSES.md  
-│   │
+│   │   project_report.pdf            ← Final project report
 │   ├── milestone-1                   ← Problem definition & literature review  
 │   │       Milestone 1.md  
 │   │
