@@ -49,83 +49,127 @@
 
 ```text
 CleanSpeech  
-│   .gitignore               ← Ignore large model files and virtual envs  
-│   README.md                ← Project overview and usage guide  
+│   .gitignore                        ← Ignore virtual envs, model weights, temp files  
+│   README.md                         ← Project overview, setup, usage  
 │
-├── doc                      ← Documentation for each milestone  
-│   ├── milestone-1          ← Problem definition & literature review  
+├── doc                               ← Full documentation across all milestones  
+│   │   LICENSES.md  
+│   │
+│   ├── milestone-1                   ← Problem definition & literature review  
 │   │       Milestone 1.md  
 │   │
-│   ├── milestone-2          ← Data preprocessing & exploratory analysis  
+│   ├── milestone-2                   ← Data preprocessing & exploratory analysis  
 │   │       classify.png  
 │   │       explain.png  
 │   │       milestone_2.md  
 │   │
-│   ├── milestone-3          ← Baseline model (TF-IDF + Logistic Regression)  
+│   ├── milestone-3                   ← Baseline TF-IDF Logistic Regression + theory  
 │   │       diagram.png  
 │   │       formula.png  
 │   │       mDeBERTa.png  
 │   │       Milestone_3.md  
 │   │
-│   ├── milestone-4          ← Transformer-based model training (mDeBERTa-v3)  
+│   ├── milestone-4                   ← Transformer fine-tuning (mDeBERTa-v3)  
 │   │       milestone-4.md  
 │   │
-│   └── milestone-5          ← Explainability & text rewriting  
+│   ├── milestone-5                   ← Explainability + rewriting framework  
+│   │       attention_heatmap.png  
+│   │       explain_fig.png  
+│   │       milestone-5.md  
+│   │       milestone-5-discarded.md  
+│   │
+│   └── milestone-6                   ← Deployment, API design, UI, and maintenance  
+│           api_documentation.md  
+│           overview.md  
+│           technical_documentation.md  
+│           user_documentation(non-technical).md  
+│           milestone-future-work_maintenance-notes.md  
+│           Project_Report_CleanSpeech_ Toxicity Detection and Rewriting with Explainable AI_1.pdf  
+│           demo1.png … demo7.png  
 │
-├── src                      ← Core data science and modeling pipeline  
-│   ├── data                 ← Raw and cleaned dataset splits  
+├── src                               ← Main data science + model pipeline  
+│   ├── data                          ← Raw, cleaned, and split datasets  
 │   │       clean_train.csv  
 │   │       clean_val.csv  
 │   │       clean_test.csv  
 │   │       train_data.csv  
 │   │       test_data.csv  
 │   │
-│   ├── mdeberta-v3-base     ← Transformer fine-tuning, inference & explainability  
-│   │   ├── code             ← Modular notebooks for the pipeline  
+│   ├── mdeberta-v3-base              ← Transformer training + inference + SHAP  
+│   │   ├── code                      ← Modular pipeline notebooks  
 │   │   │       00_config.ipynb  
 │   │   │       01_data.ipynb  
 │   │   │       02_modeling.ipynb  
 │   │   │       03_train.ipynb  
 │   │   │       04_infer.ipynb  
 │   │   │       05_explain.ipynb  
-│   │   │
-│   │   ├── models           ← Fine-tuned DeBERTa model (ignored in Git)  
+│   │   │       06_rewrite.ipynb  
+│   │   │       000_classification-finla-notebook.ipynb  
+│   │   │       000_classification-inference-final.ipynb  
+│   │   │       000_explainbility+rewrite.ipynb  
+│   │
+│   │   ├── models                    ← Fine-tuned transformer model (ignored in Git)  
 │   │   │   └── best  
+│   │   │           model.safetensors  
 │   │   │           config.json  
 │   │   │           tokenizer.json  
-│   │   │           model.safetensors  
-│   │   │
-│   │   ├── notebooks-test   ← Experimental and test notebooks  
+│   │   │           tokenizer_config.json  
+│   │   │           added_tokens.json  
+│   │   │           special_tokens_map.json  
+│   │   │           spm.model  
+│   │
+│   │   ├── notebooks-test            ← Experiments and temporary workflows  
 │   │   │       HASOC_Preparation.ipynb  
 │   │   │       train-v2.ipynb  
 │   │   │       toxic_comment_classification.py  
-│   │   │       toxic_comment_classification_inference.ipynb  
-│   │   │
-│   │   └── reports          ← Metrics, SHAP explanations, and preview data  
+│   │
+│   │   └── reports                   ← Config snapshots, SHAP HTMLs, previews  
 │   │       │   config_snapshot.json  
 │   │       │
-│   │       ├── figs         ← Generated SHAP HTML visualizations  
+│   │       ├── figs  
 │   │       │   └── shap_gallery_toxic  
 │   │       │           index.html  
-│   │       │           shap_toxic_01.html ... shap_toxic_05.html  
+│   │       │           shap_toxic_01.html … shap_toxic_05.html  
 │   │       │
-│   │       └── previews     ← Head previews of training & validation splits  
+│   │       └── previews  
 │   │               train_head.csv  
 │   │               val_head.csv  
-│   │
-│   ├── model-artifacts      ← Saved baseline (TF-IDF + Logistic Regression) models  
+│
+│   ├── model-artifacts               ← Baseline TF-IDF + Logistic Regression  
 │   │   └── tf-idf-log-reg  
 │   │           baseline_meta.json  
 │   │           baseline_pipeline.joblib  
+│
+│   ├── models                        ← Reserved for generic saved models  
+│   │   └── best  
 │   │
-│   └── tf-idf-logistic-reg  ← Baseline experimentation notebooks  
+│   ├── reports                       ← General report assets  
+│   │   └── figs  
+│   │
+│   └── tf-idf-logistic-reg           ← Baseline workflow notebooks  
 │           01_eda.ipynb  
 │           02_preprocess.ipynb  
 │           03_train-infer.ipynb  
 │           04_explain.ipynb  
 │
-└── ui                       ← Streamlit-based interface for prediction & explainability  
-    │   app.py  
+└── ui                                ← Streamlit-based application  
+    │   app.py                        ← Main Streamlit interface  
+    │   requirements.txt  
+    │   .env  
+    │
+    ├── .streamlit  
+    │       config.toml  
+    │
+    ├── pages                         ← Multi-page UI components  
+    │       chat.py                   ← Chat-based interaction page  
+    │       explain.py                ← Explainability UI  
+    │
+    ├── utils                         ← UI helper utilities  
+    │       api_base.py               ← Backend API wrapper  
+    │       rewrite_with_ai.py        ← Rewrite logic integration  
+    │
+    └── _temp                         ← Temporary configs  
+            config.py   
             
 ```
 ---
