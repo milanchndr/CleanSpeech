@@ -43,47 +43,7 @@
 
 ## Architecture Overview
 CleanSpeech integrates Streamlit UI, mDeBERTa toxicity detection, SHAP explainability, and LLM-based rewriting in a modular pipeline. See milestone docs for details.
-
-```text
-                    +-------------------------+
-                    |     Streamlit UI        |
-                    |  (chat / explain pages) |
-                    +------------+------------+
-                                 |
-                                 v
-                    +-------------------------+
-                    |       UI Utilities      |
-                    | api_base.py, rewrite_*  |
-                    +------------+------------+
-                                 |
-                                 v
-      +-----------------------------------------------------+
-      |                     Backend Engine                  |
-      |                                                     |
-      |  +-----------------+     +-----------------------+  |
-      |  | Baseline Model  |     |   mDeBERTa-v3 Model   |  |
-      |  |(TF-IDF + LogReg)|     |(HF Transformers +     |  |
-      |  |                 |     |   PyTorch)            |  |
-      |  +-----------------+     +-----------------------+  |
-      |                                                     |
-      +-------------------------+---------------------------+
-                                |
-                                v
-                    +-------------------------+
-                    |     Explainability      |
-                    |   SHAP, heatmaps        |
-                    +------------+------------+
-                                 |
-                                 v
-                    +-------------------------+
-                    |   Rewrite Module (LLM)  |
-                    +------------+------------+
-                                 |
-                                 v
-                    +-------------------------+
-                    |       Output to UI      |
-                    +-------------------------+
-```
+![Architecture Diagram](doc/milestone-3/diagram.png)
 ---
 
 ## Streamlit Interface
