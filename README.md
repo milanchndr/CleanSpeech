@@ -209,8 +209,6 @@ pip install -r ui/requirements.txt
 # run the app
 streamlit run ui/app.py
 ```
-_Visit online:_ 
-[https://cleanspeech.streamlit.app/](https://cleanspeech.streamlit.app/)
 
 Or using Command Prompt (cmd.exe)
 ```cmd
