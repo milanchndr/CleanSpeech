@@ -50,7 +50,7 @@
 ## Streamlit Interface
 
 ### Chat Interface  
-Real-time toxicity detection and safe rewrites.
+>Real-time toxicity detection and safe rewrites.
 ![Chat Interface](doc/milestone-6/demo2.png)
 
 ### Explainability Page  
