@@ -8,10 +8,10 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Domain-NLP-blue?style=flat-square"/>
-  <img src="https://img.shields.io/badge/Classifier-HuggingFace%20(mDeBERTa)-orange?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Classifier-mDeBERTa-orange?style=flat-square"/>
   <img src="https://img.shields.io/badge/Rewriter-Gemini%20API-red?style=flat-square"/>
   <img src="https://img.shields.io/badge/UI-Streamlit-brightgreen?style=flat-square"/>
-  <img src="https://img.shields.io/badge/Explainability-SHAP%20%2F%20LIME-purple?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Explainability-SHAP-purple?style=flat-square"/>
 </p>
 
 
@@ -21,31 +21,80 @@
 
 ---
 
-## Project Stack
-- Frontend/UI: Streamlit (interactive app interface)  
-- Backend: Python (Pandas, Scikit-learn, Hugging Face Transformers)  
-- Explainability: SHAP / LIME visualizations  
-- Data: Jigsaw Toxic Comment Classification Dataset (Kaggle)
+## Milestone Progress
+| Milestone | Description | Status |
+|----------|-------------|--------|
+| 1. Problem Definition & Literature Review | Defined project goals, reviewed prior work on toxicity detection, rewriting, and explainability. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 2. Data Preparation & Preprocessing | Cleaned dataset, removed noise, normalized text, created clean splits (train/val/test), and performed EDA. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 3. Baseline & Transformer Architecture Design | Implemented TF-IDF + Logistic Regression baseline, designed mDeBERTa-v3 pipeline, and finalized modeling strategy. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 4. Model Training & Evaluation | Fine-tuned mDeBERTa-v3, generated predictions, evaluated metrics, and analyzed SHAP-based explainability. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 5. Explainability & Text Rewriting Module | Integrated SHAP visualizations, implemented rewrite logic, produced attention heatmaps, and validated outputs. | ![Done](https://img.shields.io/badge/-Completed-green) |
+| 6. Deployment, API & UI Integration | Built multi-page Streamlit app, added chat interface, integrated rewriting/explainability API, and prepared documentation + demos. | ![Done](https://img.shields.io/badge/-Completed-green) |
 
 ---
 
-## Current Progress
-| Milestone | Description | Status |
-|------------|--------------|--------|
-| 1. Problem Definition & Literature Review | Defined objectives and reviewed existing toxicity detection methods. | ![Done](https://img.shields.io/badge/-Completed-green) |
-| 2. Data Preparation & Preprocessing | Cleaned dataset, handled duplicates, created `clean_text`, and generated train/val/test splits. | ![Done](https://img.shields.io/badge/-Completed-green) |
-| 3. Model Architecture Design | Designing baseline and transformer models for toxicity classification. | ![Done](https://img.shields.io/badge/-Completed-green) |
-| 4. Model Training & Evaluation | To be performed after architecture finalization. | ![Done](https://img.shields.io/badge/-Completed-green) |
-| 5. Deployment & UI Integration | Streamlit app to host detection and rewriting module. | ![Done](https://img.shields.io/badge/-Completed-green) |
+## Tech Overview
+- Backend: mDeBERTa-v3 (Transformers + PyTorch), TF-IDF + Logistic Regression baseline  
+- Explainability: SHAP (HTML), attention heatmaps  
+- Rewriting: Gemini API  
+- UI: Streamlit multi-page app  
 
+---
+
+## Architecture Overview
+CleanSpeech integrates Streamlit UI, mDeBERTa toxicity detection, SHAP explainability, and LLM-based rewriting in a modular pipeline. See milestone docs for details.
+
+```text
+                    +-------------------------+
+                    |     Streamlit UI        |
+                    |  (chat / explain pages) |
+                    +------------+------------+
+                                 |
+                                 v
+                    +-------------------------+
+                    |       UI Utilities      |
+                    | api_base.py, rewrite_*  |
+                    +------------+------------+
+                                 |
+                                 v
+      +-----------------------------------------------------+
+      |                     Backend Engine                  |
+      |                                                     |
+      |  +-----------------+     +-----------------------+  |
+      |  | Baseline Model  |     |   mDeBERTa-v3 Model   |  |
+      |  |(TF-IDF + LogReg)|     |(HF Transformers +     |  |
+      |  |                 |     |   PyTorch)            |  |
+      |  +-----------------+     +-----------------------+  |
+      |                                                     |
+      +-------------------------+---------------------------+
+                                |
+                                v
+                    +-------------------------+
+                    |     Explainability      |
+                    |   SHAP, heatmaps        |
+                    +------------+------------+
+                                 |
+                                 v
+                    +-------------------------+
+                    |   Rewrite Module (LLM)  |
+                    +------------+------------+
+                                 |
+                                 v
+                    +-------------------------+
+                    |       Output to UI      |
+                    +-------------------------+
+```
 ---
 
 ## Streamlit Interface
-chat interface for toxicity detection and rewriting:
-![Chat Interface Screenshot](doc/milestone-6/demo2.png)
 
-explainability page with SHAP visualizations:
-![Explainability Screenshot](doc/milestone-6/demo5.png)
+### Chat Interface  
+Real-time toxicity detection and safe rewrites.
+![Chat Interface](doc/milestone-6/demo2.png)
+
+### Explainability Page  
+Token-level SHAP attributions and model insights.
+![Explainability Page](doc/milestone-6/demo5.png)
 
 ---
 
@@ -186,7 +235,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 _Visit online:_ 
-<deployed url>
+[https://cleanspeech.streamlit.app/](https://cleanspeech.streamlit.app/)
 
 ---
 
