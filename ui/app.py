@@ -329,8 +329,9 @@ else:
 st.write("Type a message below to analyze toxicity, visualize model attention, and generate constructive alternatives.")
 # INPUT
 with st.container():
-    user_input = st.text_area("", placeholder="Enter text to analyze...", height=100, label_visibility="collapsed", key="analyze_input")
+    user_input = st.text_area("", placeholder="Enter text to analyze e.g. Would you both shut up, you don't run Wikipedia, especially a stupid kid", height=100, label_visibility="collapsed", key="analyze_input")
     analyze_btn = st.button("Analyze", type="primary")
+
 
 # EXECUTION
 if analyze_btn and user_input:
