@@ -196,7 +196,7 @@ def plot_toxicity_dashboard(data):
         mode = "gauge+number",
         value = overall_score * 100,
         number = {'suffix': "%"},
-        title = {'text': "IS IT TOXIC?", 'font': {'size': 16}},
+        title = {'text': "", 'font': {'size': 16}},
         domain = {'x': [0, 0.5], 'y': [0.2, 1]},  # Add top margin with y=[0.2, 1]
         gauge = {
             'axis': {'range': [0, 100]},
